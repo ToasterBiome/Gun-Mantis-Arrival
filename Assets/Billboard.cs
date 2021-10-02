@@ -11,6 +11,9 @@ public class Billboard : MonoBehaviour
     [SerializeField]
     Vector3 direction;
 
+    [SerializeField]
+    Transform spriteTransform;
+
 
 
 
@@ -23,8 +26,8 @@ public class Billboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        direction = (Camera.main.transform.position - transform.position).normalized;
+        direction = (new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z) - transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);
-        transform.rotation = rotation;
+        spriteTransform.rotation = rotation;
     }
 }
