@@ -11,23 +11,35 @@ public class GunController : MonoBehaviour
     float shootCooldown;
 
     [SerializeField]
-    float maxShootCooldown;
+    GameObject spawnCube;
 
     [SerializeField]
-    GameObject spawnCube;
+    GameObject gunModel;
+
+    [SerializeField]
+    Transform handTransform;
+
+    [SerializeField]
+    Weapon currentWeapon;
+
+    [SerializeField]
+    Weapon debugWeapon;
     // Start is called before the first frame update
     void Start()
     {
-        shootCooldown = maxShootCooldown;
+        SwitchWeapon(debugWeapon);
+        shootCooldown = currentWeapon.shotCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentWeapon == null) return;
+
         shootCooldown -= Time.deltaTime;
         if (Input.GetButton("Fire1") && shootCooldown <= 0)
         {
-            shootCooldown = maxShootCooldown;
+            shootCooldown = currentWeapon.shotCooldown;
             FireGun();
         }
     }
@@ -45,5 +57,15 @@ public class GunController : MonoBehaviour
                 Destroy(hit.transform.gameObject);
             }
         }
+    }
+
+    void SwitchWeapon(Weapon weapon)
+    {
+        currentWeapon = weapon;
+        if (gunModel != null)
+        {
+            Destroy(gunModel);
+        }
+        GameObject newGunModel = Instantiate(weapon.model, handTransform);
     }
 }
