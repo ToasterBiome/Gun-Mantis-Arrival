@@ -24,6 +24,12 @@ public class GunController : MonoBehaviour
 
     [SerializeField]
     Weapon debugWeapon;
+
+    [SerializeField]
+    ParticleSystem muzzleFlashParticles;
+
+    [SerializeField]
+    GameObject muzzleFlashPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,15 +53,17 @@ public class GunController : MonoBehaviour
     void FireGun()
     {
         gunAnimator.SetTrigger("Shoot");
+        muzzleFlashParticles.Play();
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
         {
             Debug.Log(hit.transform.name);
-            Instantiate(spawnCube, hit.point, Quaternion.identity);
-            if (hit.transform.name == "Square")
+            IDamageable damageable = hit.transform.GetComponent<IDamageable>();
+            if (damageable != null)
             {
-                Destroy(hit.transform.gameObject);
+                damageable.Damage(currentWeapon.damage);
             }
+            //Instantiate(spawnCube, hit.point, Quaternion.identity);
         }
     }
 
