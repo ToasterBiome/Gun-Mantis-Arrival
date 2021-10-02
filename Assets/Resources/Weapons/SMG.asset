@@ -16,3 +16,6 @@ MonoBehaviour:
   shotCooldown: 0.1
   damage: 1
   maxAmmo: 24
+  muzzleFlashPoint: {x: 0, y: 0.9, z: 4}
+  shotAmount: 1
+  shotSpread: 0.02

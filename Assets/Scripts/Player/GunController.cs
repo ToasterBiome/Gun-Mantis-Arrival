@@ -15,10 +15,11 @@ public class GunController : MonoBehaviour
     [SerializeField] Weapon currentWeapon;
     [SerializeField] Weapon debugWeapon;
     [SerializeField] ParticleSystem muzzleFlashParticles;
-    [SerializeField] GameObject muzzleFlashPoint;
     [SerializeField] int currentAmmo;
     [SerializeField] bool isReloading;
+    [SerializeField] bool isSoftReloading;
     [SerializeField] List<Weapon> possibleWeapons;
+    [SerializeField] GameObject impactEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,7 @@ public class GunController : MonoBehaviour
         if (currentWeapon == null) return;
 
         shootCooldown -= Time.deltaTime;
-        if (Input.GetButton("Fire1") && shootCooldown <= 0 && currentAmmo > 0)
+        if (Input.GetButton("Fire1") && shootCooldown <= 0 && currentAmmo > 0 && !isSoftReloading)
         {
             currentAmmo--;
             OnAmmoCountChange?.Invoke(currentAmmo, currentWeapon.maxAmmo);
@@ -42,6 +43,7 @@ public class GunController : MonoBehaviour
         if (currentAmmo <= 0 && Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
             isReloading = true;
+            isSoftReloading = true;
             StartCoroutine(Reload());
         }
     }
@@ -50,16 +52,22 @@ public class GunController : MonoBehaviour
     {
         gunAnimator.SetTrigger("Shoot");
         muzzleFlashParticles.Play();
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
+        for (int shots = 0; shots < currentWeapon.shotAmount; shots++)
         {
-            Debug.Log(hit.transform.name);
-            IDamageable damageable = hit.transform.GetComponent<IDamageable>();
-            if (damageable != null)
+            RaycastHit hit;
+            Vector3 shotAngle = Camera.main.transform.forward + ((Vector3)UnityEngine.Random.insideUnitCircle * currentWeapon.shotSpread);
+            if (Physics.Raycast(Camera.main.transform.position, shotAngle, out hit))
             {
-                damageable.Damage(currentWeapon.damage);
+                Debug.Log(hit.transform.name);
+                IDamageable damageable = hit.transform.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.Damage(currentWeapon.damage);
+                }
+                GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impactGO, 1f);
+                //Instantiate(spawnCube, hit.point, Quaternion.identity);
             }
-            //Instantiate(spawnCube, hit.point, Quaternion.identity);
         }
     }
 
@@ -72,7 +80,8 @@ public class GunController : MonoBehaviour
         }
         gunModel = Instantiate(weapon.model, handTransform);
         currentAmmo = currentWeapon.maxAmmo;
-        shootCooldown = currentWeapon.shotCooldown;
+        shootCooldown = 0;
+        muzzleFlashParticles.transform.localPosition = currentWeapon.muzzleFlashPoint;
         OnWeaponChange?.Invoke(currentWeapon);
 
     }
@@ -97,6 +106,7 @@ public class GunController : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         Weapon newWeapon = possibleWeapons[UnityEngine.Random.Range(0, possibleWeapons.Count)];
         SwitchWeapon(newWeapon);
+        isSoftReloading = false;
         yield return new WaitForSeconds(1f);
         isReloading = false;
         yield return null;

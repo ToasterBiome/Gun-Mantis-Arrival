@@ -9,4 +9,8 @@ public class Weapon : ScriptableObject
     public float shotCooldown;
     public float damage;
     public int maxAmmo;
+    public Vector3 muzzleFlashPoint;
+
+    public int shotAmount;
+    public float shotSpread;
 }
