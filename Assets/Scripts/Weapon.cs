@@ -8,4 +8,5 @@ public class Weapon : ScriptableObject
     public GameObject model;
     public float shotCooldown;
     public float damage;
+    public int maxAmmo;
 }
