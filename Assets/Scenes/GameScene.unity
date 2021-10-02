@@ -885,8 +885,9 @@ GameObject:
   - component: {fileID: 1654812638}
   - component: {fileID: 1654812640}
   - component: {fileID: 1654812637}
+  - component: {fileID: 1654812639}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Cardboard Cutout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -922,6 +923,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1654812639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654812636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9d24dca8fa9a14181a7cd9cd82f4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 0
+  enemyData: {fileID: 11400000, guid: b287d0fa4d7e633428f56e756834ed1a, type: 2}
 --- !u!136 &1654812640
 CapsuleCollider:
   m_ObjectHideFlags: 0

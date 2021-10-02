@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 919132149155446097, guid: 404e0621c2ebbab478e8214a28469485, type: 3}
   shotCooldown: 0.1
-  damage: 0
+  damage: 1
