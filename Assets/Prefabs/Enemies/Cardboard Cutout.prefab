@@ -115,6 +115,8 @@ MonoBehaviour:
   recalculateTimer: 0
   maxRecalculateTimer: 4
   shootTransform: {fileID: 5918749424673701365}
+  animator: {fileID: 3113094991317067303}
+  currentAnimState: 
   currentState: 0
   stateTimer: 0
   aimDirection: {x: 0, y: 0, z: 0}
@@ -251,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5918749425619317027}
   - component: {fileID: 5918749425619317026}
+  - component: {fileID: 3113094991317067303}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -323,3 +326,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3113094991317067303
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5918749425619317028}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ad8629938ddde546bf86820e8e6015c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected float maxRecalculateTimer;
     [SerializeField] protected Transform shootTransform;
 
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected string currentAnimState;
+
 
     public enum EnemyState
     {
@@ -100,9 +103,19 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void Die()
+    protected virtual void Die()
     {
+        SwitchState(EnemyState.Death);
+        ChangeAnimationState("Die");
         //eventually do animation in here yeet
-        Destroy(gameObject);
+        Destroy(gameObject, 1f);
+    }
+
+    protected void ChangeAnimationState(string newState)
+    {
+        if (animator == null) return;
+        if (currentAnimState == newState) return;
+        animator.Play(newState);
+        currentAnimState = newState;
     }
 }

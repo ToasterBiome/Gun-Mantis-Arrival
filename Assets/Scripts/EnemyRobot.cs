@@ -19,6 +19,7 @@ public class EnemyRobot : Enemy
         switch (currentState)
         {
             case EnemyState.Moving:
+                ChangeAnimationState("Walk");
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     SwitchState(EnemyState.Aiming);
@@ -26,6 +27,7 @@ public class EnemyRobot : Enemy
                 break;
 
             case EnemyState.Aiming:
+                ChangeAnimationState("Aim");
                 aimingRenderer.enabled = true;
                 aimDirection = Vector3.Lerp(aimDirection, playerObject.transform.position - transform.position, Time.deltaTime * 2f);
                 aimingRenderer.SetPosition(0, shootTransform.position);
@@ -37,13 +39,14 @@ public class EnemyRobot : Enemy
                 break;
 
             case EnemyState.Shooting:
+                ChangeAnimationState("Attack");
                 aimingRenderer.enabled = false;
                 Shoot(aimDirection);
                 SwitchState(EnemyState.Cooldown);
                 break;
 
             case EnemyState.Cooldown:
-
+                ChangeAnimationState("Attack");
                 if (stateTimer > 2f)
                 {
                     bool lineOfSlight = GetLineOfSight(playerObject.transform);
@@ -98,5 +101,11 @@ public class EnemyRobot : Enemy
         }
 
         Destroy(laserObject, 2f);
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        Destroy(aimingRenderer);
     }
 }
