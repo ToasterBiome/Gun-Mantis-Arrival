@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 259649601044172151}
   - component: {fileID: 259649601044172148}
   m_Layer: 0
-  m_Name: Cardboard Cutout
+  m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,8 @@ MonoBehaviour:
   stateTimer: 0
   aimDirection: {x: 0, y: 0, z: 0}
   impactEffect: {fileID: 1241155989536404889, guid: e248008a3ee7dd04b9417ee2b1e83861, type: 3}
-  muzzleFlashParticles: {fileID: 6452288001574899729}
+  muzzleFlashParticles:
+  - {fileID: 6452288001574899729}
   laserPrefab: {fileID: 7184617650739755879, guid: ccdb465cc270b674e9e5658ad4d95dc3, type: 3}
   aimingRenderer: {fileID: 0}
 --- !u!195 &259649601044172151

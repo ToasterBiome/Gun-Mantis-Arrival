@@ -7,8 +7,8 @@ public class EnemyLizard : Enemy
     [SerializeField] int ammo;
     [SerializeField] int maxAmmo;
     [SerializeField] float shootCooldown;
-
     [SerializeField] float maxShootCooldown;
+    [SerializeField] int muzzleFlash;
 
     protected override void Start()
     {
@@ -20,17 +20,23 @@ public class EnemyLizard : Enemy
     {
         base.Update();
         shootCooldown -= Time.deltaTime;
+        aimDirection = Vector3.Lerp(aimDirection, playerObject.transform.position - transform.position, Time.deltaTime * 4f);
         switch (currentState)
         {
             case EnemyState.Moving:
-                if (shootCooldown <= 0 && ammo > 0)
+                ChangeAnimationState("Walk");
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    shootCooldown = maxShootCooldown;
-                    Shoot(playerObject.transform.position - transform.position);
-                    ammo--;
-                    if (ammo <= 0)
+                    SwitchState(EnemyState.Shooting);
+                }
+                if (stateTimer > 2f)
+                {
+                    if (!agent.hasPath)
                     {
-                        SwitchState(EnemyState.Cooldown);
+                        //recalculate
+                        Vector3 randomPlace = transform.position + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+                        agent.SetDestination(randomPlace);
+                        SwitchState(EnemyState.Moving);
                     }
                 }
                 break;
@@ -40,21 +46,32 @@ public class EnemyLizard : Enemy
                 break;
 
             case EnemyState.Shooting:
-
+                ChangeAnimationState("Attack");
+                if (shootCooldown <= 0 && ammo > 0)
+                {
+                    shootCooldown = maxShootCooldown;
+                    Shoot(aimDirection);
+                    ammo--;
+                    if (ammo <= 0)
+                    {
+                        SwitchState(EnemyState.Cooldown);
+                    }
+                }
                 break;
 
             case EnemyState.Cooldown:
+                ChangeAnimationState("Idle");
                 if (stateTimer > 2f)
                 {
                     ammo = maxAmmo;
                     bool lineOfSlight = GetLineOfSight(playerObject.transform);
                     if (lineOfSlight)
                     {
-                        SwitchState(EnemyState.Moving);
+                        SwitchState(EnemyState.Shooting);
                     }
                     else
                     {
-                        Vector3 randomPlace = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+                        Vector3 randomPlace = transform.position + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
                         agent.SetDestination(randomPlace);
                         SwitchState(EnemyState.Moving);
                     }
@@ -73,6 +90,10 @@ public class EnemyLizard : Enemy
     {
         //laser beam
         RaycastHit hit;
+
+        if (muzzleFlashParticles != null) muzzleFlashParticles[muzzleFlash].Play();
+        muzzleFlash++;
+        if (muzzleFlash > muzzleFlashParticles.Count - 1) muzzleFlash = 0;
         if (Physics.Raycast(shootTransform.position, direction, out hit))
         {
             IDamageable damageable = hit.transform.GetComponent<IDamageable>();
@@ -84,5 +105,11 @@ public class EnemyLizard : Enemy
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 1f);
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(shootTransform.position, aimDirection);
     }
 }

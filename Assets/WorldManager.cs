@@ -21,6 +21,8 @@ public class WorldManager : MonoBehaviour
     [SerializeField] int enemySpawnsLeft;
     public static Action<int> OnWaveChanged;
 
+    [SerializeField] List<Enemy> spawnedEnemies;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +41,15 @@ public class WorldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dropTimer += Time.deltaTime * ((float)waveNumber * 0.5f);
+        if (waveNumber == 1)
+        {
+            dropTimer += Time.deltaTime;
+        }
+        else
+        {
+            dropTimer += Time.deltaTime * ((float)waveNumber * 0.5f);
+        }
+
         if (dropTimer >= maxDropTimer)
         {
             dropTimer -= maxDropTimer;
@@ -48,13 +58,13 @@ public class WorldManager : MonoBehaviour
             {
                 if (groundPlates.Count > 0)
                 {
-                    DropRandomPlate();
                     int amountOfEnemiesToSpawn = UnityEngine.Random.Range(1, waveNumber);
                     for (int i = 0; i < amountOfEnemiesToSpawn; i++)
                     {
                         enemySpawnsLeft--;
                         SpawnRandomEnemy();
                     }
+                    DropRandomPlate();
                 }
             }
             else
@@ -84,7 +94,24 @@ public class WorldManager : MonoBehaviour
     }
     void DropRandomPlate()
     {
-        Plate dropPlate = groundPlates[UnityEngine.Random.Range(0, groundPlates.Count)];
+        Plate dropPlate = null;
+        bool validPlate = false;
+        while (!validPlate)
+        {
+            dropPlate = groundPlates[UnityEngine.Random.Range(0, groundPlates.Count)];
+            bool valid = true;
+            foreach (Enemy enemy in spawnedEnemies)
+            {
+                if (Vector3.Distance(enemy.transform.position, dropPlate.transform.position) < 4f)
+                {
+                    valid = false;
+                }
+            }
+            if (valid)
+            {
+                validPlate = true;
+            }
+        }
         StartCoroutine(DropPlate(dropPlate, 2f));
     }
 
@@ -92,7 +119,18 @@ public class WorldManager : MonoBehaviour
     {
         Vector3 spawnPosition = groundPlates[UnityEngine.Random.Range(0, groundPlates.Count)].transform.position + new Vector3(0, 1);
         spawnPosition += new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4));
-        GameObject spawnedEnemy = Instantiate(potentialSpawns[UnityEngine.Random.Range(0, potentialSpawns.Count)], spawnPosition, Quaternion.identity);
+        GameObject spawnedEnemyObject = Instantiate(potentialSpawns[UnityEngine.Random.Range(0, potentialSpawns.Count)], spawnPosition, Quaternion.identity);
+        Enemy spawnedEnemy = spawnedEnemyObject.GetComponent<Enemy>();
+        spawnedEnemies.Add(spawnedEnemy);
+        spawnedEnemy.OnEnemyDeath += HandleEnemyDeath;
+    }
+
+    void HandleEnemyDeath(Enemy enemy)
+    {
+        if (spawnedEnemies.Contains(enemy))
+        {
+            spawnedEnemies.Remove(enemy);
+        }
     }
 
     IEnumerator DropPlate(Plate plate, float delay)

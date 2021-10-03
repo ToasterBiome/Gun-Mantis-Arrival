@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected Animator animator;
     [SerializeField] protected string currentAnimState;
 
+    public Action<Enemy> OnEnemyDeath;
+
 
     public enum EnemyState
     {
@@ -33,7 +36,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected float stateTimer;
     [SerializeField] protected Vector3 aimDirection;
     [SerializeField] protected GameObject impactEffect;
-    [SerializeField] protected ParticleSystem muzzleFlashParticles;
+    [SerializeField] protected List<ParticleSystem> muzzleFlashParticles;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -41,7 +44,7 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHP = enemyData.maxHP;
         gameObject.name = enemyData.name;
         agent = GetComponent<NavMeshAgent>();
-        Vector3 randomPlace = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+        Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-20, 20), 0, UnityEngine.Random.Range(-20, 20));
         //agent.SetDestination(randomPlace);
 
         if (playerObject == null)
@@ -92,7 +95,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected void RecalculatePosition()
     {
-        agent.SetDestination(new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20)));
+        agent.SetDestination(new Vector3(UnityEngine.Random.Range(-20, 20), 0, UnityEngine.Random.Range(-20, 20)));
     }
 
     public void Damage(float damage)
@@ -100,6 +103,7 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHP -= damage;
         if (currentHP <= 0)
         {
+
             Die();
         }
     }
@@ -108,8 +112,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         SwitchState(EnemyState.Death);
         ChangeAnimationState("Die");
-        //eventually do animation in here yeet
         agent.isStopped = true;
+        OnEnemyDeath?.Invoke(this);
         Destroy(gameObject, 1f);
     }
 
