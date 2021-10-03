@@ -35,6 +35,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     Vector3 verticalMovement;
+    [SerializeField] bool frozen = false;
+
+    void OnEnable()
+    {
+        EndPortal.OnEndGame += OnGameEnd;
+    }
+
+    void OnDisable()
+    {
+        EndPortal.OnEndGame -= OnGameEnd;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +60,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (frozen) return;
         //camera
         lookRotation += Input.GetAxis("Mouse X") * 2f;
         float mouseY = Input.GetAxis("Mouse Y") * 2f;
@@ -111,5 +124,14 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, (-transform.up * 1.1f));
+    }
+
+    void OnGameEnd()
+    {
+        //freeze us so we cant fall to our dooms
+        rb.useGravity = false;
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
+        frozen = true;
     }
 }
