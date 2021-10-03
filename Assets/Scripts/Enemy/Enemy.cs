@@ -65,7 +65,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Debug.LogWarning(target.transform.position);
         RaycastHit hit;
-        if (Physics.Raycast(shootTransform.position, target.position - shootTransform.position, out hit))
+        int mask = ~3;
+        if (Physics.Raycast(shootTransform.position, target.position - shootTransform.position, out hit, 1000, mask))
         {
             Debug.Log(hit.transform.name);
             if (hit.transform == target)

@@ -99,7 +99,7 @@ public class GunController : MonoBehaviour
 
         }
         gunModel = Instantiate(weapon.model, handTransform);
-        gunModel.layer = 6;
+        gunModel.layer = 3;
         currentAmmo = currentWeapon.maxAmmo;
         shootCooldown = 0;
         muzzleFlashParticles.transform.localPosition = currentWeapon.muzzleFlashPoint;

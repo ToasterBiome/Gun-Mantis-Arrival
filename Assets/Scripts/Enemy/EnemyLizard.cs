@@ -94,7 +94,8 @@ public class EnemyLizard : Enemy
         if (muzzleFlashParticles != null) muzzleFlashParticles[muzzleFlash].Play();
         muzzleFlash++;
         if (muzzleFlash > muzzleFlashParticles.Count - 1) muzzleFlash = 0;
-        if (Physics.Raycast(shootTransform.position, direction, out hit))
+        int mask = ~3;
+        if (Physics.Raycast(shootTransform.position, direction, out hit, 1000, mask))
         {
             IDamageable damageable = hit.transform.GetComponent<IDamageable>();
             if (damageable != null)
