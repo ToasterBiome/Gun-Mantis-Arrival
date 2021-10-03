@@ -86,7 +86,7 @@ public class GunController : MonoBehaviour
 
     void RocketFire()
     {
-        GameObject rocket = Instantiate(rocketPrefab, muzzleFlashParticles.transform.position, Quaternion.LookRotation(Camera.main.transform.forward, Vector3.up));
+        GameObject rocket = Instantiate(rocketPrefab, transform.position + Camera.main.transform.forward, Quaternion.LookRotation(Camera.main.transform.forward, Vector3.up));
         Projectile projectile = rocket.GetComponent<Projectile>();
         projectile.SetProjectileValues(currentWeapon.damage, currentWeapon.shotSpread, Camera.main.transform.forward.normalized * 64f, 6);
     }

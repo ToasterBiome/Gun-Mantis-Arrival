@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Jellyfish
   m_EditorClassIdentifier: 
   maxHP: 5
-  weaponDamage: 0
+  weaponDamage: 5
