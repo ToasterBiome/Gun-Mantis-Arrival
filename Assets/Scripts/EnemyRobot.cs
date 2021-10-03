@@ -79,6 +79,7 @@ public class EnemyRobot : Enemy
         GameObject laserObject;
         Debug.Log("Shooting");
         laserObject = Instantiate(laserPrefab, shootTransform.position, Quaternion.identity);
+        if (muzzleFlashParticles != null) muzzleFlashParticles.Play();
         LineRenderer laserRenderer = laserObject.GetComponent<LineRenderer>();
         laserRenderer.SetPosition(0, shootTransform.position);
         if (Physics.Raycast(shootTransform.position, direction, out hit))

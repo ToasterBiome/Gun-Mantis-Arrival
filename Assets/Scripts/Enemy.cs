@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected float stateTimer;
     [SerializeField] protected Vector3 aimDirection;
     [SerializeField] protected GameObject impactEffect;
+    [SerializeField] protected ParticleSystem muzzleFlashParticles;
 
     // Start is called before the first frame update
     protected virtual void Start()
