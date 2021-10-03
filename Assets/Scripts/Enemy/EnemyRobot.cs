@@ -82,8 +82,7 @@ public class EnemyRobot : Enemy
         if (muzzleFlashParticles.Count > 0) muzzleFlashParticles[0].Play();
         LineRenderer laserRenderer = laserObject.GetComponent<LineRenderer>();
         laserRenderer.SetPosition(0, shootTransform.position);
-        int mask = ~3;
-        if (Physics.Raycast(shootTransform.position, direction, out hit, 1000, mask))
+        if (Physics.Raycast(shootTransform.position, direction, out hit, 1000))
         {
             //spawn particles or somethin
             laserRenderer.SetPosition(1, hit.point);

@@ -59,14 +59,14 @@ public class Enemy : MonoBehaviour, IDamageable
     protected virtual void Update()
     {
         stateTimer += Time.deltaTime;
+        transform.rotation = Quaternion.LookRotation(aimDirection);
     }
 
     protected bool GetLineOfSight(Transform target)
     {
         Debug.LogWarning(target.transform.position);
         RaycastHit hit;
-        int mask = ~3;
-        if (Physics.Raycast(shootTransform.position, target.position - shootTransform.position, out hit, 1000, mask))
+        if (Physics.Raycast(shootTransform.position, target.position - shootTransform.position, out hit, 1000))
         {
             Debug.Log(hit.transform.name);
             if (hit.transform == target)
