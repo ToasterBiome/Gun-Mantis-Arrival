@@ -124,4 +124,10 @@ public class Enemy : MonoBehaviour, IDamageable
         animator.Play(newState);
         currentAnimState = newState;
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(shootTransform.position, aimDirection);
+    }
 }

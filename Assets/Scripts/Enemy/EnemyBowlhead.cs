@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLizard : Enemy
+public class EnemyBowlhead : Enemy
 {
     [SerializeField] int ammo;
     [SerializeField] int maxAmmo;
     [SerializeField] float shootCooldown;
     [SerializeField] float maxShootCooldown;
-    [SerializeField] int muzzleFlash;
+
+    [SerializeField] GameObject laserPrefab;
 
     protected override void Start()
     {
@@ -34,7 +35,7 @@ public class EnemyLizard : Enemy
                     if (!agent.hasPath)
                     {
                         //recalculate
-                        Vector3 randomPlace = transform.position + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+                        Vector3 randomPlace = transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
                         agent.SetDestination(randomPlace);
                         SwitchState(EnemyState.Moving);
                     }
@@ -71,11 +72,10 @@ public class EnemyLizard : Enemy
                     }
                     else
                     {
-                        Vector3 randomPlace = transform.position + new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+                        Vector3 randomPlace = transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
                         agent.SetDestination(randomPlace);
                         SwitchState(EnemyState.Moving);
                     }
-                    //TODO: check if they need to move
                 }
                 break;
 
@@ -88,24 +88,11 @@ public class EnemyLizard : Enemy
 
     protected override void Shoot(Vector3 direction)
     {
-        //laser beam
-        RaycastHit hit;
+        //slow moving laser
 
-        if (muzzleFlashParticles != null) muzzleFlashParticles[muzzleFlash].Play();
-        muzzleFlash++;
-        if (muzzleFlash > muzzleFlashParticles.Count - 1) muzzleFlash = 0;
-        if (Physics.Raycast(shootTransform.position, direction, out hit))
-        {
-            IDamageable damageable = hit.transform.GetComponent<IDamageable>();
-            if (damageable != null)
-            {
-                damageable.Damage(enemyData.weaponDamage);
-            }
-
-            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactGO, 1f);
-        }
+        if (muzzleFlashParticles != null) muzzleFlashParticles[0].Play();
+        GameObject laser = Instantiate(laserPrefab, shootTransform.position, Quaternion.LookRotation(aimDirection, Vector3.up) * Quaternion.Euler(0, 90, 0));
+        Projectile projectile = laser.GetComponent<Projectile>();
+        projectile.SetProjectileValues(enemyData.weaponDamage, 2f, aimDirection * 8f, 8);
     }
-
-
 }

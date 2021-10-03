@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bdfc4be45e505b44d9aee6fc93a24d28, type: 3}
-  m_Name: Cardboard Cutout
+  m_Name: Jellyfish
   m_EditorClassIdentifier: 
-  maxHP: 10
-  weaponDamage: 15
+  maxHP: 0
+  weaponDamage: 0

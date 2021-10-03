@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2386429025920281477}
   - component: {fileID: 2386429025920281479}
   - component: {fileID: 2386429025920281478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4873,7 +4873,7 @@ GameObject:
   - component: {fileID: 2386429026700103831}
   - component: {fileID: 2386429026700103825}
   - component: {fileID: 2386429026700103824}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9735,7 +9735,7 @@ GameObject:
   - component: {fileID: 7708493084831549870}
   - component: {fileID: 7708493084831549871}
   - component: {fileID: 2386429025416979000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9839,7 +9839,7 @@ GameObject:
   - component: {fileID: 7708493085390596231}
   - component: {fileID: 7708493085390596283}
   - component: {fileID: 7708493085390596229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9957,7 +9957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7708493085761570168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shoot Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

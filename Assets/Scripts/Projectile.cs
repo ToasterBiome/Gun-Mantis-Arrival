@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float damageDropoff;
     [SerializeField] Vector3 velocity;
     [SerializeField] GameObject explosionPrefab;
+    [SerializeField] int layerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +26,12 @@ public class Projectile : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
-    public void SetProjectileValues(float dam, float radius, Vector3 vel)
+    public void SetProjectileValues(float dam, float radius, Vector3 vel, int ignoreLayer)
     {
         damage = dam;
         damageDropoff = radius;
         velocity = vel;
+        layerMask = ignoreLayer;
     }
 
     void Explode()
@@ -40,7 +42,7 @@ public class Projectile : MonoBehaviour
             IDamageable damagable = hitCollider.GetComponent<IDamageable>();
             if (damagable != null)
             {
-                if (hitCollider.gameObject.layer == 6)
+                if (hitCollider.gameObject.layer == layerMask)
                 {
                     damagable.Damage(damage * 0.25f);
                 }
@@ -64,7 +66,7 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != 6)
+        if (other.gameObject.layer != layerMask)
         {
             Explode();
         }
