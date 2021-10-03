@@ -3,7 +3,12 @@ guid: 4ec3aab19214dde4f8638e2af038a797
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SniperRifle1
+    second: {fileID: 2100000, guid: fb03e57073def3548b8dbc52f341e98e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
