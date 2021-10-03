@@ -15,6 +15,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] float dropTimer;
     [SerializeField] float maxDropTimer;
     [SerializeField] NavMeshSurface navMesh;
+    [SerializeField] List<GameObject> potentialSpawns;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,7 @@ public class WorldManager : MonoBehaviour
             if (groundPlates.Count > 0)
             {
                 DropRandomPlate();
+                SpawnRandomEnemy();
             }
         }
     }
@@ -48,6 +50,12 @@ public class WorldManager : MonoBehaviour
     {
         Plate dropPlate = groundPlates[UnityEngine.Random.Range(0, groundPlates.Count)];
         StartCoroutine(DropPlate(dropPlate, 2f));
+    }
+
+    void SpawnRandomEnemy()
+    {
+        Vector3 spawnPosition = groundPlates[UnityEngine.Random.Range(0, groundPlates.Count)].transform.position + new Vector3(0, 1);
+        GameObject spawnedEnemy = Instantiate(potentialSpawns[UnityEngine.Random.Range(0, potentialSpawns.Count)], spawnPosition, Quaternion.identity);
     }
 
     IEnumerator DropPlate(Plate plate, float delay)
