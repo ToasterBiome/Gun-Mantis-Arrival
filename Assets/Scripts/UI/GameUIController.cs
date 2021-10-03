@@ -9,6 +9,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI weaponNameText;
     [SerializeField] TextMeshProUGUI reloadText;
     [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI waveText;
 
 
     void OnEnable()
@@ -16,6 +17,7 @@ public class GameUIController : MonoBehaviour
         GunController.OnAmmoCountChange += OnAmmoCountChange;
         GunController.OnWeaponChange += OnWeaponChange;
         PlayerManager.OnHealthChanged += OnHealthChanged;
+        WorldManager.OnWaveChanged += OnWaveChanged;
     }
 
     void OnDisable()
@@ -23,6 +25,7 @@ public class GameUIController : MonoBehaviour
         GunController.OnAmmoCountChange -= OnAmmoCountChange;
         GunController.OnWeaponChange -= OnWeaponChange;
         PlayerManager.OnHealthChanged -= OnHealthChanged;
+        WorldManager.OnWaveChanged -= OnWaveChanged;
     }
 
 
@@ -57,5 +60,10 @@ public class GameUIController : MonoBehaviour
     void OnHealthChanged(float health)
     {
         healthText.SetText("Health: " + health.ToString("F1") + "%");
+    }
+
+    void OnWaveChanged(int waveNumber)
+    {
+        waveText.SetText("Wave: " + waveNumber.ToString("D2"));
     }
 }

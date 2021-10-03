@@ -96,7 +96,8 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        if (Physics.Raycast(transform.position, -transform.up, 1.1f))
+        LayerMask mask = LayerMask.GetMask("Platform");
+        if (Physics.Raycast(transform.position, -transform.up, 1.1f, mask))
         {
             return true;
         }

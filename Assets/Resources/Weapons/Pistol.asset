@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 919132149155446097, guid: d88c307996498d94aae76f9d50e165a9, type: 3}
   shotCooldown: 0.25
-  damage: 4
+  damage: 8
   maxAmmo: 5
   muzzleFlashPoint: {x: 0, y: 1.1, z: 2.6}
   shotAmount: 1

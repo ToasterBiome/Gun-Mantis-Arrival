@@ -109,6 +109,7 @@ public class Enemy : MonoBehaviour, IDamageable
         SwitchState(EnemyState.Death);
         ChangeAnimationState("Die");
         //eventually do animation in here yeet
+        agent.isStopped = true;
         Destroy(gameObject, 1f);
     }
 

@@ -4,33 +4,40 @@ using UnityEngine;
 
 public class Plate : MonoBehaviour
 {
-    [SerializeField] bool isDropping = false;
+    [SerializeField] bool isMoving = false;
     [SerializeField] float velocity;
     [SerializeField] float maxVelocity;
     [SerializeField] float verticalCutoff;
     [SerializeField] WorldManager worldManager;
 
-    public void StartDrop()
+    public void StartDrop(float direction)
     {
-        isDropping = true;
+        velocity = 0;
+        maxVelocity = direction;
+        isMoving = true;
     }
 
     void Update()
     {
-        if (isDropping)
+        if (isMoving)
         {
-            if (velocity < maxVelocity)
+            if (Mathf.Abs(velocity) < Mathf.Abs(maxVelocity))
             {
-                velocity -= Time.deltaTime;
+                velocity += Time.deltaTime;
                 if (velocity > maxVelocity)
                 {
                     velocity = maxVelocity;
                 }
             }
             transform.position += new Vector3(0, velocity * Time.deltaTime, 0);
-            if (transform.position.y < verticalCutoff)
+            if (transform.position.y < verticalCutoff && Mathf.Sign(maxVelocity) == -1)
             {
                 Destroy(gameObject);
+            }
+            if (transform.position.y >= 0 && Mathf.Sign(maxVelocity) == 1)
+            {
+                transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                isMoving = false;
             }
         }
     }

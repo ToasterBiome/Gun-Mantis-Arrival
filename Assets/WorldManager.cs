@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System;
 using System.Linq;
 using System.Collections;
@@ -16,6 +17,9 @@ public class WorldManager : MonoBehaviour
     [SerializeField] float maxDropTimer;
     [SerializeField] NavMeshSurface navMesh;
     [SerializeField] List<GameObject> potentialSpawns;
+    [SerializeField] int waveNumber;
+    [SerializeField] int enemySpawnsLeft;
+    public static Action<int> OnWaveChanged;
 
     // Start is called before the first frame update
     void Start()
@@ -28,23 +32,55 @@ public class WorldManager : MonoBehaviour
                 groundPlates.Add(plate);
             }
         }
-
+        ChangeWave(1);
         GenerateWorld(5, 5);
     }
 
     // Update is called once per frame
     void Update()
     {
-        dropTimer += Time.deltaTime;
+        dropTimer += Time.deltaTime * ((float)waveNumber * 0.5f);
         if (dropTimer >= maxDropTimer)
         {
             dropTimer -= maxDropTimer;
-            if (groundPlates.Count > 0)
+
+            if (enemySpawnsLeft > 0)
             {
-                DropRandomPlate();
-                //SpawnRandomEnemy();
+                if (groundPlates.Count > 0)
+                {
+                    DropRandomPlate();
+                    int amountOfEnemiesToSpawn = UnityEngine.Random.Range(1, waveNumber);
+                    for (int i = 0; i < amountOfEnemiesToSpawn; i++)
+                    {
+                        enemySpawnsLeft--;
+                        SpawnRandomEnemy();
+                    }
+                }
             }
+            else
+            {
+                if (waveNumber < 5)
+                {
+                    ChangeWave(waveNumber + 1);
+                }
+                else
+                {
+                    //you win the game
+                }
+
+            }
+
+
         }
+    }
+
+    void ChangeWave(int number)
+    {
+        waveNumber = number;
+        OnWaveChanged?.Invoke(waveNumber);
+        enemySpawnsLeft = waveNumber * 5; //5
+        dropTimer = -8f;
+        GenerateWorld(5, 5);
     }
     void DropRandomPlate()
     {
@@ -55,6 +91,7 @@ public class WorldManager : MonoBehaviour
     void SpawnRandomEnemy()
     {
         Vector3 spawnPosition = groundPlates[UnityEngine.Random.Range(0, groundPlates.Count)].transform.position + new Vector3(0, 1);
+        spawnPosition += new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4));
         GameObject spawnedEnemy = Instantiate(potentialSpawns[UnityEngine.Random.Range(0, potentialSpawns.Count)], spawnPosition, Quaternion.identity);
     }
 
@@ -67,7 +104,32 @@ public class WorldManager : MonoBehaviour
         navMeshObstacle.size = new Vector3(4, 1, 4);
         navMeshObstacle.carving = true;
         groundPlates.Remove(plate);
-        plate.StartDrop();
+        plate.StartDrop(-4);
+        navMesh.BuildNavMesh();
+        yield return null;
+    }
+
+    void SpawnPlate(Vector3 location)
+    {
+        bool found = false;
+        foreach (Plate plate in groundPlates)
+        {
+            if (plate.transform.position.x == location.x && plate.transform.position.z == location.z)
+            {
+                found = true;
+            }
+        }
+        if (!found)
+        {
+            GameObject spawnedObject = Instantiate(platePrefab, location, Quaternion.identity);
+            groundPlates.Add(spawnedObject.GetComponent<Plate>());
+            spawnedObject.GetComponent<Plate>().StartDrop(4f);
+        }
+    }
+
+    IEnumerator DelayedNavMeshGeneration()
+    {
+        yield return new WaitForSeconds(8f);
         navMesh.BuildNavMesh();
         yield return null;
     }
@@ -93,12 +155,12 @@ public class WorldManager : MonoBehaviour
                 }
                 if (!found)
                 {
-                    GameObject spawnedObject = Instantiate(platePrefab, new Vector3(x * 8, 0, z * 8), Quaternion.identity);
-                    groundPlates.Add(spawnedObject.GetComponent<Plate>());
+                    SpawnPlate(new Vector3(x * 8, -15, z * 8));
+
                 }
             }
         }
 
-        navMesh.BuildNavMesh();
+        StartCoroutine(DelayedNavMeshGeneration());
     }
 }

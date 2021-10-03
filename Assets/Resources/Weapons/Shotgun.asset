@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   model: {fileID: 919132149155446097, guid: 67e13992d4be1bc49a3d802da36ed12b, type: 3}
-  shotCooldown: 2
+  shotCooldown: 1
   damage: 4
   maxAmmo: 3
   muzzleFlashPoint: {x: 0, y: 0.5, z: 6.2}
   shotAmount: 6
-  shotSpread: 0.05
+  shotSpread: 0.075
