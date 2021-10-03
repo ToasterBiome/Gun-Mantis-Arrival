@@ -15,7 +15,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] GameObject plateDropParticles;
     [SerializeField] float dropTimer;
     [SerializeField] float maxDropTimer;
-    [SerializeField] NavMeshSurface navMesh;
+    [SerializeField] List<NavMeshSurface> navMesh;
     [SerializeField] List<GameObject> potentialSpawns;
     [SerializeField] int waveNumber;
     [SerializeField] int enemySpawnsLeft;
@@ -143,7 +143,7 @@ public class WorldManager : MonoBehaviour
         navMeshObstacle.carving = true;
         groundPlates.Remove(plate);
         plate.StartDrop(-4);
-        navMesh.BuildNavMesh();
+        RegenerateNavMesh();
         yield return null;
     }
 
@@ -165,10 +165,18 @@ public class WorldManager : MonoBehaviour
         }
     }
 
+    void RegenerateNavMesh()
+    {
+        foreach (NavMeshSurface surface in navMesh)
+        {
+            surface.BuildNavMesh();
+        }
+    }
+
     IEnumerator DelayedNavMeshGeneration()
     {
         yield return new WaitForSeconds(8f);
-        navMesh.BuildNavMesh();
+        RegenerateNavMesh();
         yield return null;
     }
 

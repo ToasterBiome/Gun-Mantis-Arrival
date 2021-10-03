@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfc4be45e505b44d9aee6fc93a24d28, type: 3}
   m_Name: Jellyfish
   m_EditorClassIdentifier: 
-  maxHP: 0
+  maxHP: 5
   weaponDamage: 0
