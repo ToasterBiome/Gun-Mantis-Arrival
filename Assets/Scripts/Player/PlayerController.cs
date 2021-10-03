@@ -130,7 +130,6 @@ public class PlayerController : MonoBehaviour
         //freeze us so we cant fall to our dooms
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
-        rb.isKinematic = true;
         frozen = true;
     }
 }

@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,9 @@ public class GunController : MonoBehaviour
     [SerializeField] bool isSoftReloading;
     [SerializeField] List<Weapon> possibleWeapons;
     [SerializeField] GameObject impactEffect;
+    [SerializeField] GameObject rocketPrefab;
+
+    [SerializeField] Weapon weaponOverride;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +60,11 @@ public class GunController : MonoBehaviour
     {
         gunAnimator.SetTrigger("Shoot");
         muzzleFlashParticles.Play();
+        if (currentWeapon.name == "Rocket Launcher")
+        {
+            RocketFire();
+            return;
+        }
         for (int shots = 0; shots < currentWeapon.shotAmount; shots++)
         {
             RaycastHit hit;
@@ -73,6 +82,13 @@ public class GunController : MonoBehaviour
                 //Instantiate(spawnCube, hit.point, Quaternion.identity);
             }
         }
+    }
+
+    void RocketFire()
+    {
+        GameObject rocket = Instantiate(rocketPrefab, muzzleFlashParticles.transform.position, Quaternion.LookRotation(Camera.main.transform.forward, Vector3.up));
+        Projectile projectile = rocket.GetComponent<Projectile>();
+        projectile.SetProjectileValues(currentWeapon.damage, currentWeapon.shotSpread, Camera.main.transform.forward.normalized * 64f);
     }
 
     void SwitchWeapon(Weapon weapon)
@@ -109,7 +125,15 @@ public class GunController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.8f);
-        Weapon newWeapon = possibleWeapons[UnityEngine.Random.Range(0, possibleWeapons.Count)];
+        Weapon newWeapon = null;
+        if (weaponOverride != null)
+        {
+            newWeapon = weaponOverride;
+        }
+        else
+        {
+            newWeapon = possibleWeapons[UnityEngine.Random.Range(0, possibleWeapons.Count)];
+        }
         SwitchWeapon(newWeapon);
         isSoftReloading = false;
         yield return new WaitForSeconds(1f);

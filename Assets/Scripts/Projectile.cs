@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] float damageDropoff;
     [SerializeField] Vector3 velocity;
+    [SerializeField] GameObject explosionPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -24,16 +25,37 @@ public class Projectile : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
+    public void SetProjectileValues(float dam, float radius, Vector3 vel)
+    {
+        damage = dam;
+        damageDropoff = radius;
+        velocity = vel;
+    }
+
     void Explode()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, damage);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageDropoff);
         foreach (var hitCollider in hitColliders)
         {
             IDamageable damagable = hitCollider.GetComponent<IDamageable>();
             if (damagable != null)
             {
-                damagable.Damage(damage);
+                if (hitCollider.gameObject.layer == 6)
+                {
+                    damagable.Damage(damage * 0.25f);
+                }
+                else
+                {
+                    damagable.Damage(damage);
+                }
+
             }
+        }
+
+        if (explosionPrefab != null)
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 1f);
         }
 
         Destroy(gameObject);
@@ -42,7 +64,10 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Explode();
+        if (other.gameObject.layer != 6)
+        {
+            Explode();
+        }
     }
 
 }

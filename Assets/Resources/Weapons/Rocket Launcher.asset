@@ -18,4 +18,4 @@ MonoBehaviour:
   maxAmmo: 1
   muzzleFlashPoint: {x: 0, y: 0, z: 0}
   shotAmount: 1
-  shotSpread: 0
+  shotSpread: 4
