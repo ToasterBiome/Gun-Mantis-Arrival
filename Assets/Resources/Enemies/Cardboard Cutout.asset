@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Cardboard Cutout
   m_EditorClassIdentifier: 
   maxHP: 10
+  weaponDamage: 15

@@ -84,6 +84,12 @@ public class EnemyRobot : Enemy
         {
             //spawn particles or somethin
             laserRenderer.SetPosition(1, hit.point);
+
+            IDamageable damageable = hit.transform.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.Damage(enemyData.weaponDamage);
+            }
         }
         else
         {

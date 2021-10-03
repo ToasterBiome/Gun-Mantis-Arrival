@@ -8,18 +8,21 @@ public class GameUIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI ammoCountText;
     [SerializeField] TextMeshProUGUI weaponNameText;
     [SerializeField] TextMeshProUGUI reloadText;
+    [SerializeField] TextMeshProUGUI healthText;
 
 
     void OnEnable()
     {
         GunController.OnAmmoCountChange += OnAmmoCountChange;
         GunController.OnWeaponChange += OnWeaponChange;
+        PlayerManager.OnHealthChanged += OnHealthChanged;
     }
 
     void OnDisable()
     {
         GunController.OnAmmoCountChange -= OnAmmoCountChange;
         GunController.OnWeaponChange -= OnWeaponChange;
+        PlayerManager.OnHealthChanged -= OnHealthChanged;
     }
 
 
@@ -49,5 +52,10 @@ public class GameUIController : MonoBehaviour
         OnAmmoCountChange(weapon.maxAmmo, weapon.maxAmmo);
         weaponNameText.SetText(weapon.name);
         reloadText.SetText("");
+    }
+
+    void OnHealthChanged(float health)
+    {
+        healthText.SetText("Health: " + health.ToString("F1"));
     }
 }
