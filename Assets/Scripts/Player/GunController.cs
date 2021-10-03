@@ -46,6 +46,10 @@ public class GunController : MonoBehaviour
             isSoftReloading = true;
             StartCoroutine(Reload());
         }
+        else if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+        {
+            gunAnimator.SetTrigger("Flip");
+        }
     }
 
     void FireGun()
