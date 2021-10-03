@@ -23,6 +23,8 @@ public class WorldManager : MonoBehaviour
 
     [SerializeField] List<Enemy> spawnedEnemies;
 
+    [SerializeField] GameObject portalObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,15 +71,18 @@ public class WorldManager : MonoBehaviour
             }
             else
             {
-                if (waveNumber < 5)
+                if (spawnedEnemies.Count == 0) //if all enemies are dead
                 {
-                    ChangeWave(waveNumber + 1);
+                    if (waveNumber < 6)
+                    {
+                        ChangeWave(waveNumber + 1);
+                    }
+                    else
+                    {
+                        GenerateWorld(5, 5);
+                        portalObject.SetActive(true);
+                    }
                 }
-                else
-                {
-                    //you win the game
-                }
-
             }
 
 
