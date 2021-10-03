@@ -16,6 +16,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Image fadeImage;
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] Button backButton;
+    [SerializeField] Button restartButton;
 
     void OnEnable()
     {
@@ -25,6 +26,7 @@ public class GameUIController : MonoBehaviour
         WorldManager.OnWaveChanged += OnWaveChanged;
         EndPortal.OnEndGame += OnGameEnd;
         backButton.onClick.AddListener(BackToMenu);
+        restartButton.onClick.AddListener(RestartGame);
     }
 
     void OnDisable()
@@ -34,7 +36,6 @@ public class GameUIController : MonoBehaviour
         PlayerManager.OnHealthChanged -= OnHealthChanged;
         WorldManager.OnWaveChanged -= OnWaveChanged;
         EndPortal.OnEndGame -= OnGameEnd;
-        backButton.onClick.RemoveAllListeners();
     }
 
 
@@ -43,6 +44,7 @@ public class GameUIController : MonoBehaviour
     {
         fadeImage.color = Color.black;
         LeanTween.alpha(fadeImage.rectTransform, 0f, 1f);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -77,19 +79,32 @@ public class GameUIController : MonoBehaviour
         waveText.SetText("Wave: " + waveNumber.ToString("D2"));
     }
 
-    void OnGameEnd()
+    void OnGameEnd(bool win)
     {
         LeanTween.alpha(fadeImage.rectTransform, 1f, 1f).setOnComplete(() =>
             {
+                Cursor.lockState = CursorLockMode.None;
                 winText.gameObject.SetActive(true);
                 backButton.gameObject.SetActive(true);
-                winText.SetText("You win!");
+                restartButton.gameObject.SetActive(true);
+                if (win)
+                {
+                    winText.SetText("You prevailed against the other aliens");
+                }
+                else
+                {
+                    winText.SetText("You seize up and fall limp, your eyes dead and lifeless...");
+                }
             });
     }
 
     void BackToMenu()
     {
-        //make MainMenu do something
-        //SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    void RestartGame()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }

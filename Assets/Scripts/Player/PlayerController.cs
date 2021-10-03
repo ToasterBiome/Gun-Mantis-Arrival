@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         mainCamera = Camera.main;
         cameraRotation = 0;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -126,7 +125,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawRay(transform.position, (-transform.up * 1.1f));
     }
 
-    void OnGameEnd()
+    void OnGameEnd(bool win)
     {
         //freeze us so we cant fall to our dooms
         rb.useGravity = false;

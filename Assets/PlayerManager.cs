@@ -36,6 +36,6 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     void Die()
     {
-        SceneManager.LoadScene("GameScene");
+        EndPortal.OnEndGame?.Invoke(false);
     }
 }

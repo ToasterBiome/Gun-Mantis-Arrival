@@ -6,7 +6,7 @@ using UnityEngine;
 public class EndPortal : MonoBehaviour
 {
 
-    public static Action OnEndGame;
+    public static Action<bool> OnEndGame;
 
 
     // Start is called before the first frame update
@@ -27,7 +27,7 @@ public class EndPortal : MonoBehaviour
         if (player != null)
         {
             //it's the player, lets rock
-            OnEndGame?.Invoke();
+            OnEndGame?.Invoke(true);
         }
     }
 }
