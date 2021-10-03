@@ -9,7 +9,19 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected float currentHP;
     [SerializeField] protected EnemyData enemyData;
     [SerializeField] protected NavMeshAgent agent;
-    [SerializeField] protected GameObject playerObject;
+    [SerializeField] GameObject _player;
+    [SerializeField]
+    protected GameObject playerObject
+    {
+        get
+        {
+            if (_player == null)
+            {
+                _player = GameObject.FindObjectOfType<PlayerController>().gameObject;
+            }
+            return _player;
+        }
+    }
 
     [SerializeField] protected float recalculateTimer;
     [SerializeField] protected float maxRecalculateTimer;
@@ -46,11 +58,6 @@ public class Enemy : MonoBehaviour, IDamageable
         agent = GetComponent<NavMeshAgent>();
         Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-20, 20), 0, UnityEngine.Random.Range(-20, 20));
         //agent.SetDestination(randomPlace);
-
-        if (playerObject == null)
-        {
-            playerObject = GameObject.FindObjectOfType<PlayerController>().gameObject;
-        }
 
         currentState = EnemyState.Cooldown;
     }
