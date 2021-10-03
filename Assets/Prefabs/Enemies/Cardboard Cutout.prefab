@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 5918749425041428489}
   - component: {fileID: 5918749425041428535}
   - component: {fileID: 5918749425041428490}
-  - component: {fileID: 5918749425041428488}
+  - component: {fileID: 7691297029015477996}
   - component: {fileID: 5918749425041428534}
   - component: {fileID: 5918749425041428533}
   m_Layer: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0, w: 0}
   direction: {x: 0, y: 0, z: 0}
   spriteTransform: {fileID: 5918749425619317027}
---- !u!114 &5918749425041428488
+--- !u!114 &7691297029015477996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5918749425041428491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f9d24dca8fa9a14181a7cd9cd82f4e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b3423611062757469e7b8b897228e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 0
@@ -184,10 +184,10 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:

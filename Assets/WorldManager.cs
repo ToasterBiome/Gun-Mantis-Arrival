@@ -42,7 +42,7 @@ public class WorldManager : MonoBehaviour
             if (groundPlates.Count > 0)
             {
                 DropRandomPlate();
-                SpawnRandomEnemy();
+                //SpawnRandomEnemy();
             }
         }
     }
