@@ -2,55 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRobot : Enemy
+public class EnemyLizard : Enemy
 {
-    [SerializeField] GameObject laserPrefab;
-    [SerializeField] LineRenderer aimingRenderer;
+    [SerializeField] int ammo;
+    [SerializeField] int maxAmmo;
+    [SerializeField] float shootCooldown;
+
+    [SerializeField] float maxShootCooldown;
 
     protected override void Start()
     {
         base.Start();
-        aimingRenderer = GetComponent<LineRenderer>();
+        ammo = maxAmmo;
     }
 
     protected override void Update()
     {
         base.Update();
+        shootCooldown -= Time.deltaTime;
         switch (currentState)
         {
             case EnemyState.Moving:
-                if (agent.remainingDistance <= agent.stoppingDistance)
+                if (shootCooldown <= 0 && ammo > 0)
                 {
-                    SwitchState(EnemyState.Aiming);
+                    shootCooldown = maxShootCooldown;
+                    Shoot(playerObject.transform.position - transform.position);
+                    ammo--;
+                    if (ammo <= 0)
+                    {
+                        SwitchState(EnemyState.Cooldown);
+                    }
                 }
                 break;
 
             case EnemyState.Aiming:
-                aimingRenderer.enabled = true;
-                aimDirection = Vector3.Lerp(aimDirection, playerObject.transform.position - transform.position, Time.deltaTime * 2f);
-                aimingRenderer.SetPosition(0, shootTransform.position);
-                aimingRenderer.SetPosition(1, aimDirection + (aimDirection * 100f));
-                if (stateTimer > 2f && Vector3.Angle(aimDirection, playerObject.transform.position - transform.position) < 5f)
-                {
-                    SwitchState(EnemyState.Shooting);
-                }
+
                 break;
 
             case EnemyState.Shooting:
-                aimingRenderer.enabled = false;
-                Shoot(aimDirection);
-                SwitchState(EnemyState.Cooldown);
+
                 break;
 
             case EnemyState.Cooldown:
-
                 if (stateTimer > 2f)
                 {
+                    ammo = maxAmmo;
                     bool lineOfSlight = GetLineOfSight(playerObject.transform);
-                    Debug.LogWarning(lineOfSlight);
                     if (lineOfSlight)
                     {
-                        SwitchState(EnemyState.Aiming);
+                        SwitchState(EnemyState.Moving);
                     }
                     else
                     {
@@ -73,16 +73,8 @@ public class EnemyRobot : Enemy
     {
         //laser beam
         RaycastHit hit;
-        GameObject laserObject;
-        Debug.Log("Shooting");
-        laserObject = Instantiate(laserPrefab, shootTransform.position, Quaternion.identity);
-        LineRenderer laserRenderer = laserObject.GetComponent<LineRenderer>();
-        laserRenderer.SetPosition(0, shootTransform.position);
         if (Physics.Raycast(shootTransform.position, direction, out hit))
         {
-            //spawn particles or somethin
-            laserRenderer.SetPosition(1, hit.point);
-
             IDamageable damageable = hit.transform.GetComponent<IDamageable>();
             if (damageable != null)
             {
@@ -92,11 +84,5 @@ public class EnemyRobot : Enemy
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 1f);
         }
-        else
-        {
-            laserRenderer.SetPosition(1, shootTransform.position + (direction * 100f));
-        }
-
-        Destroy(laserObject, 2f);
     }
 }

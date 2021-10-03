@@ -115,11 +115,12 @@ MonoBehaviour:
   recalculateTimer: 0
   maxRecalculateTimer: 4
   shootTransform: {fileID: 5918749424673701365}
-  laserPrefab: {fileID: 7184617650739755879, guid: ccdb465cc270b674e9e5658ad4d95dc3, type: 3}
-  aimingRenderer: {fileID: 0}
   currentState: 0
   stateTimer: 0
   aimDirection: {x: 0, y: 0, z: 0}
+  impactEffect: {fileID: 1241155989536404889, guid: e248008a3ee7dd04b9417ee2b1e83861, type: 3}
+  laserPrefab: {fileID: 7184617650739755879, guid: ccdb465cc270b674e9e5658ad4d95dc3, type: 3}
+  aimingRenderer: {fileID: 0}
 --- !u!195 &5918749425041428534
 NavMeshAgent:
   m_ObjectHideFlags: 0

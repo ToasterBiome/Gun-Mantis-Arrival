@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected EnemyState currentState;
     [SerializeField] protected float stateTimer;
     [SerializeField] protected Vector3 aimDirection;
+    [SerializeField] protected GameObject impactEffect;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -55,6 +56,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected bool GetLineOfSight(Transform target)
     {
+        Debug.LogWarning(target.transform.position);
         RaycastHit hit;
         if (Physics.Raycast(shootTransform.position, target.position - shootTransform.position, out hit))
         {

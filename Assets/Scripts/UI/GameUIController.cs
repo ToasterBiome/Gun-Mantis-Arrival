@@ -56,6 +56,6 @@ public class GameUIController : MonoBehaviour
 
     void OnHealthChanged(float health)
     {
-        healthText.SetText("Health: " + health.ToString("F1"));
+        healthText.SetText("Health: " + health.ToString("F1") + "%");
     }
 }
