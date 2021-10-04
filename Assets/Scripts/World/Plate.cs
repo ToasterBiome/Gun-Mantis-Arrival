@@ -8,7 +8,6 @@ public class Plate : MonoBehaviour
     [SerializeField] float velocity;
     [SerializeField] float maxVelocity;
     [SerializeField] float verticalCutoff;
-    [SerializeField] WorldManager worldManager;
 
     public void StartDrop(float direction)
     {
