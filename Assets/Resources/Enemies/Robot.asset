@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 10
   weaponDamage: 15
+  fireSound: {fileID: 8300000, guid: a81daec232617fb4d98c578fc1f438e0, type: 3}
+  deathSound: {fileID: 8300000, guid: 7df96550013038f44800bc14769b71f9, type: 3}

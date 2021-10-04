@@ -7,4 +7,7 @@ public class EnemyData : ScriptableObject
 {
     public float maxHP;
     public float weaponDamage;
+
+    public AudioClip fireSound;
+    public AudioClip deathSound;
 }

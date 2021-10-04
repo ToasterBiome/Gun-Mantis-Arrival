@@ -99,6 +99,7 @@ public class EnemyMunga : Enemy
 
     void MeleeAttack()
     {
+        base.Shoot(Vector3.zero);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, meleeRadius);
         foreach (var hitCollider in hitColliders)
         {

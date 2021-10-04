@@ -1,3 +1,4 @@
+using Microsoft.CSharp.RuntimeBinder;
 using System.IO;
 using System;
 using System.Collections;
@@ -93,6 +94,7 @@ public class GunController : MonoBehaviour
         GameObject rocket = Instantiate(rocketPrefab, transform.position + Camera.main.transform.forward, Quaternion.LookRotation(Camera.main.transform.forward, Vector3.up));
         Projectile projectile = rocket.GetComponent<Projectile>();
         projectile.SetProjectileValues(currentWeapon.damage, currentWeapon.shotSpread, Camera.main.transform.forward.normalized * 64f, 6);
+        gunModel.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     void SwitchWeapon(Weapon weapon)
@@ -121,6 +123,15 @@ public class GunController : MonoBehaviour
             gunModel.layer = 3;
             gunRB.velocity = transform.up * 8f;
             gunRB.angularVelocity = new Vector3(-360f * Mathf.Deg2Rad, 0, 0);
+            Material gunMaterial = gunModel.GetComponent<MeshRenderer>().material;
+            if (gunMaterial == null)//rocket hacks
+            {
+                gunMaterial = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>().material;
+            }
+            LeanTween.value(gunModel, 0f, 1f, 1f).setOnUpdate((value) =>
+            {
+                gunMaterial.SetFloat("_DissolveAmount", value);
+            });
             Destroy(gunModel.gameObject, 1.8f);
         }
 

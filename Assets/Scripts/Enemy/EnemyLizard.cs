@@ -88,6 +88,7 @@ public class EnemyLizard : Enemy
 
     protected override void Shoot(Vector3 direction)
     {
+        base.Shoot(direction);
         //laser beam
         RaycastHit hit;
 

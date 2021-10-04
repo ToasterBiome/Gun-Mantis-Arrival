@@ -88,6 +88,7 @@ public class EnemyBowlhead : Enemy
 
     protected override void Shoot(Vector3 direction)
     {
+        base.Shoot(direction);
         //slow moving laser
 
         if (muzzleFlashParticles != null) muzzleFlashParticles[0].Play();

@@ -74,6 +74,7 @@ public class EnemyRobot : Enemy
 
     protected override void Shoot(Vector3 direction)
     {
+        base.Shoot(direction);
         //laser beam
         RaycastHit hit;
         GameObject laserObject;

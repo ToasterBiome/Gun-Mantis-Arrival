@@ -10,7 +10,6 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected EnemyData enemyData;
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] GameObject _player;
-    [SerializeField]
     protected GameObject playerObject
     {
         get
@@ -29,8 +28,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] protected Animator animator;
     [SerializeField] protected string currentAnimState;
-
     public Action<Enemy> OnEnemyDeath;
+    [SerializeField] AudioSource audioSource;
+
+    [SerializeField] SpriteRenderer spriteRenderer;
 
 
     public enum EnemyState
@@ -56,6 +57,7 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHP = enemyData.maxHP;
         gameObject.name = enemyData.name;
         agent = GetComponent<NavMeshAgent>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-20, 20), 0, UnityEngine.Random.Range(-20, 20));
         //agent.SetDestination(randomPlace);
 
@@ -99,7 +101,11 @@ public class Enemy : MonoBehaviour, IDamageable
         stateTimer = 0;
     }
 
-    protected virtual void Shoot(Vector3 direction) { }
+    protected virtual void Shoot(Vector3 direction)
+    {
+        audioSource.clip = enemyData.fireSound;
+        audioSource.Play();
+    }
 
     protected void RecalculatePosition()
     {
@@ -121,6 +127,13 @@ public class Enemy : MonoBehaviour, IDamageable
         SwitchState(EnemyState.Death);
         ChangeAnimationState("Die");
         agent.isStopped = true;
+        audioSource.clip = enemyData.deathSound;
+        audioSource.Play();
+        Material spriteMaterial = spriteRenderer.material;
+        LeanTween.value(spriteRenderer.gameObject, 0f, 1f, 1f).setOnUpdate((value) =>
+            {
+                spriteMaterial.SetFloat("_DissolveAmount", value);
+            });
         OnEnemyDeath?.Invoke(this);
         Destroy(gameObject, 1f);
     }

@@ -10,9 +10,9 @@ Material:
   m_Name: Pistol_material
   m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _MK_ARTISTIC_ANIMATION_STUTTER _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
-    _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_IRIDESCENCE_DEFAULT _MK_LIGHT_BANDED
-    _MK_OUTLINE_HULL_CLIP _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS _MK_WRAPPED_DIFFUSE
-    _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+    _MK_DISSOLVE_DEFAULT _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_IRIDESCENCE_DEFAULT
+    _MK_LIGHT_BANDED _MK_OUTLINE_HULL_CLIP _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS
+    _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 230c2b4726aae5644aa4e14a2c0a908e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DrawnMap:
@@ -163,8 +163,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DiffuseSmoothness: 0.236
     - _DiffuseThresholdOffset: 0.25
-    - _Dissolve: 0
-    - _DissolveAmount: 0.5
+    - _Dissolve: 1
+    - _DissolveAmount: 0
     - _DissolveBorderSize: 0.25
     - _DissolveMapScale: 1
     - _DrawnClampMax: 0.904
