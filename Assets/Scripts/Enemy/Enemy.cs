@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour, IDamageable
         //agent.SetDestination(randomPlace);
         currentState = EnemyState.Cooldown;
         Material spriteMaterial = spriteRenderer.material;
+        spriteMaterial.SetFloat("_DissolveAmount", 1f);
         LeanTween.value(spriteRenderer.gameObject, 1f, 0f, 1f).setOnUpdate((value) =>
             {
                 spriteMaterial.SetFloat("_DissolveAmount", value);
@@ -149,12 +150,12 @@ public class Enemy : MonoBehaviour, IDamageable
         audioSource.Play();
         GetComponent<CapsuleCollider>().enabled = false;
         Material spriteMaterial = spriteRenderer.material;
-        LeanTween.value(spriteRenderer.gameObject, 0f, 1f, 1f).setOnUpdate((value) =>
+        LeanTween.value(spriteRenderer.gameObject, 0f, 1f, 2f).setOnUpdate((value) =>
             {
                 spriteMaterial.SetFloat("_DissolveAmount", value);
             });
         OnEnemyDeath?.Invoke(this);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 2f);
     }
 
     public void ForceDie()
