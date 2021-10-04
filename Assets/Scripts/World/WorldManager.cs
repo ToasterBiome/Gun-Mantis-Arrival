@@ -90,8 +90,9 @@ public class WorldManager : MonoBehaviour
         waveNumber = number;
         if (waveNumber >= 5)
         {
-            GenerateWorld(5, 5);
             portalObject.SetActive(true);
+            OnWaveChanged?.Invoke(waveNumber);
+            GenerateWorld(5, 5);
             return;
         }
         enemySpawnsLeft = waveNumber * 5; //5
