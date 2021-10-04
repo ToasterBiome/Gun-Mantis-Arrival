@@ -11,9 +11,9 @@ Material:
   m_Shader: {fileID: 4800000, guid: 7633a2fd8a3bed44791c9e952ff86e5d, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _FRESNELHIGHLIGHTS_ON _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
     _MK_DETAIL_BLEND_MIX _MK_DISSOLVE_BORDER_COLOR _MK_EMISSION _MK_EMISSION_MAP
-    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_BANDED _MK_NORMAL_MAP
-    _MK_OUTLINE_HULL_CLIP _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC
-    _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS _MK_IRIDESCENCE_DEFAULT
+    _MK_LIGHT_BANDED _MK_NORMAL_MAP _MK_OUTLINE_HULL_CLIP _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS
+    _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -226,8 +226,8 @@ Material:
     - _HatchingMapScale: 1
     - _Initialized: 1
     - _InputTab: 1
-    - _Iridescence: 0
-    - _IridescenceSize: 4.9
+    - _Iridescence: 1
+    - _IridescenceSize: 4.32
     - _IridescenceSmoothness: 0.5
     - _IridescenceThresholdOffset: 0
     - _Light: 2
@@ -296,7 +296,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
+    - _AlbedoColor: {r: 0.6226415, g: 0.46051973, b: 0.47693714, a: 1}
     - _BASE_COLOR: {r: 0.60832, g: 0.21232, b: 0.17888, a: 0.8}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.7604, g: 0.2654, b: 0.2236, a: 1}
@@ -306,7 +306,7 @@ Material:
     - _EmissionColor: {r: 1, g: 0, b: 0.05270481, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
-    - _IridescenceColor: {r: 0.7310999, g: 0.26464927, b: 0.7924528, a: 0.5}
+    - _IridescenceColor: {r: 0.8301887, g: 0.22242787, b: 0.22819409, a: 0.5}
     - _LightTransmissionColor: {r: 1, g: 0.65, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimBrightColor: {r: 1, g: 1, b: 1, a: 1}
