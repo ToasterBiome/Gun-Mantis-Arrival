@@ -207,7 +207,7 @@ Material:
     - _DetailNormalMapIntensity: 1
     - _DetailNormalMapScale: 1
     - _Diffuse: 0
-    - _DiffuseSmoothness: 0.236
+    - _DiffuseSmoothness: 0.449
     - _DiffuseThresholdOffset: 0.25
     - _Dissolve: 2
     - _DissolveAmount: 0
@@ -227,20 +227,20 @@ Material:
     - _Initialized: 1
     - _InputTab: 1
     - _Iridescence: 1
-    - _IridescenceSize: 4.25
-    - _IridescenceSmoothness: 0.5
+    - _IridescenceSize: 3.17
+    - _IridescenceSmoothness: 0.783
     - _IridescenceThresholdOffset: 0
     - _Light: 2
     - _LightBands: 3
-    - _LightBandsScale: 0.198
-    - _LightThreshold: 0.234
+    - _LightBandsScale: 0.408
+    - _LightThreshold: 0.438
     - _LightTransmission: 0
     - _LightTransmissionDistortion: 0.25
     - _LightTransmissionIntensity: 1
     - _LightTransmissionSmoothness: 0.5
     - _LightTransmissionThresholdOffset: 0.25
     - _METALNESS: 0
-    - _Metallic: 0.571
+    - _Metallic: 0.605
     - _Mode: 3
     - _NormalMapIntensity: 1
     - _OcclusionMapIntensity: 1
@@ -267,7 +267,7 @@ Material:
     - _SPECULAR_ROUGHNESS: 0.2
     - _Saturation: 1
     - _SketchMapScale: 1
-    - _Smoothness: 0.654
+    - _Smoothness: 0.505
     - _SmoothnessTextureChannel: 0
     - _Specular: 0
     - _SpecularHighlights: 1
