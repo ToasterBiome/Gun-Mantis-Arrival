@@ -18,6 +18,11 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Button backButton;
     [SerializeField] Button restartButton;
 
+    [SerializeField] Color healthAlertColor;
+    [SerializeField] Color healthColor;
+    [SerializeField] Color waveAlertColor;
+    [SerializeField] Color waveColor;
+
     void OnEnable()
     {
         GunController.OnAmmoCountChange += OnAmmoCountChange;
@@ -72,11 +77,15 @@ public class GameUIController : MonoBehaviour
     void OnHealthChanged(float health)
     {
         healthText.SetText("Health: " + health.ToString("F1") + "%");
+        healthText.color = healthAlertColor;
+        LeanTween.textColor(healthText.rectTransform, healthColor, 1f);
     }
 
     void OnWaveChanged(int waveNumber)
     {
         waveText.SetText("Wave: " + waveNumber.ToString("D2"));
+        waveText.color = waveAlertColor;
+        LeanTween.textColor(waveText.rectTransform, waveColor, 1f);
     }
 
     void OnGameEnd(bool win)

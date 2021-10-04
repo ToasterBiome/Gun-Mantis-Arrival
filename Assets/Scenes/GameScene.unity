@@ -288,6 +288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundPlates: []
   platePrefab: {fileID: 7913330652595948570, guid: 1fb42c5a3874eb0458fb36cb91ea54fe, type: 3}
+  plateSetPieces:
+  - {fileID: 4088957516208502243, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
   plateDropParticles: {fileID: 5506089252935236, guid: db74061c5b18a7f42b451bcf3d6ee762, type: 3}
   dropTimer: 0
   maxDropTimer: 8
@@ -12531,6 +12533,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2145560623}
   m_CullTransparentMesh: 1
+--- !u!1001 &4541776972402769916
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502241, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088957516208502243, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_Name
+      value: Plate (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6802681308079820405, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
+      propertyPath: m_Carve
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c38f4438d74885f42a5066213ab6beae, type: 3}
 --- !u!1001 &7913330653378180503
 PrefabInstance:
   m_ObjectHideFlags: 0

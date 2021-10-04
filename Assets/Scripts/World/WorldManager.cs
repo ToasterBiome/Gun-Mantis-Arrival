@@ -12,6 +12,7 @@ public class WorldManager : MonoBehaviour
 
     [SerializeField] List<Plate> groundPlates;
     [SerializeField] GameObject platePrefab;
+    [SerializeField] List<GameObject> plateSetPieces;
     [SerializeField] GameObject plateDropParticles;
     [SerializeField] float dropTimer;
     [SerializeField] float maxDropTimer;
@@ -164,7 +165,17 @@ public class WorldManager : MonoBehaviour
         }
         if (!found)
         {
-            GameObject spawnedObject = Instantiate(platePrefab, location, Quaternion.identity);
+            GameObject spawnedObject;
+
+            if (UnityEngine.Random.value > 0.6f)
+            {
+                spawnedObject = Instantiate(plateSetPieces[UnityEngine.Random.Range(0, plateSetPieces.Count)], location, Quaternion.identity);
+                spawnedObject.transform.rotation = GetRandomRotation();
+            }
+            else
+            {
+                spawnedObject = Instantiate(platePrefab, location, Quaternion.identity);
+            }
             groundPlates.Add(spawnedObject.GetComponent<Plate>());
             spawnedObject.GetComponent<Plate>().StartDrop(4f);
         }
@@ -213,5 +224,11 @@ public class WorldManager : MonoBehaviour
         }
 
         StartCoroutine(DelayedNavMeshGeneration());
+    }
+
+    Quaternion GetRandomRotation()
+    {
+        int rotation = UnityEngine.Random.Range(0, 4);
+        return Quaternion.Euler(0, rotation * 90, 0);
     }
 }
