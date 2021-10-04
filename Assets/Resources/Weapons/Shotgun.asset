@@ -19,3 +19,5 @@ MonoBehaviour:
   muzzleFlashPoint: {x: 0, y: 0.5, z: 6.2}
   shotAmount: 6
   shotSpread: 0.075
+  fireSound: {fileID: 8300000, guid: 3be6d776243b8cd4680f4fcad96b1af2, type: 3}
+  reloadSound: {fileID: 8300000, guid: de85f8986b62203488759905921a0591, type: 3}

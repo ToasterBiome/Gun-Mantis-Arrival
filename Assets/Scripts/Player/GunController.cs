@@ -22,8 +22,11 @@ public class GunController : MonoBehaviour
     [SerializeField] List<Weapon> possibleWeapons;
     [SerializeField] GameObject impactEffect;
     [SerializeField] GameObject rocketPrefab;
-
     [SerializeField] Weapon weaponOverride;
+
+    [SerializeField] AudioSource fireSound;
+
+    [SerializeField] AudioSource reloadSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +63,7 @@ public class GunController : MonoBehaviour
     {
         gunAnimator.SetTrigger("Shoot");
         muzzleFlashParticles.Play();
+        fireSound.Play();
         if (currentWeapon.name == "Rocket Launcher")
         {
             RocketFire();
@@ -96,9 +100,12 @@ public class GunController : MonoBehaviour
         currentWeapon = weapon;
         gunModel = Instantiate(weapon.model, handTransform);
         gunModel.layer = 3;
+        fireSound.clip = currentWeapon.fireSound;
+        reloadSound.clip = currentWeapon.reloadSound;
         currentAmmo = currentWeapon.maxAmmo;
         shootCooldown = 0;
         muzzleFlashParticles.transform.localPosition = currentWeapon.muzzleFlashPoint;
+        reloadSound.Play();
         OnWeaponChange?.Invoke(currentWeapon);
 
     }

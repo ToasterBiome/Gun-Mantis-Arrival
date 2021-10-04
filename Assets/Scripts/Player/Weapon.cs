@@ -13,4 +13,6 @@ public class Weapon : ScriptableObject
 
     public int shotAmount;
     public float shotSpread;
+    public AudioClip fireSound;
+    public AudioClip reloadSound;
 }
