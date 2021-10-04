@@ -68,7 +68,7 @@ public class GunController : MonoBehaviour
         for (int shots = 0; shots < currentWeapon.shotAmount; shots++)
         {
             RaycastHit hit;
-            Vector3 shotAngle = Camera.main.transform.forward + ((Vector3)UnityEngine.Random.insideUnitCircle * currentWeapon.shotSpread);
+            Vector3 shotAngle = Camera.main.transform.forward + new Vector3(UnityEngine.Random.Range(-currentWeapon.shotSpread, currentWeapon.shotSpread), UnityEngine.Random.Range(-currentWeapon.shotSpread, currentWeapon.shotSpread), UnityEngine.Random.Range(-currentWeapon.shotSpread, currentWeapon.shotSpread));
             if (Physics.Raycast(Camera.main.transform.position, shotAngle, out hit))
             {
                 Debug.Log(hit.transform.name);
@@ -94,10 +94,6 @@ public class GunController : MonoBehaviour
     void SwitchWeapon(Weapon weapon)
     {
         currentWeapon = weapon;
-        if (gunModel != null)
-        {
-
-        }
         gunModel = Instantiate(weapon.model, handTransform);
         gunModel.layer = 3;
         currentAmmo = currentWeapon.maxAmmo;
@@ -114,9 +110,6 @@ public class GunController : MonoBehaviour
         if (gunModel != null)
         {
             gunModel.transform.SetParent(null);
-            SphereCollider collider = gunModel.AddComponent<SphereCollider>();
-            collider.center = Vector3.zero;
-            collider.radius = 2f;
             Rigidbody gunRB = gunModel.AddComponent<Rigidbody>();
             gunModel.layer = 3;
             gunRB.velocity = transform.up * 8f;
