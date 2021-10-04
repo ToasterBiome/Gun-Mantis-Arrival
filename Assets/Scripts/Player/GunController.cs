@@ -129,7 +129,7 @@ public class GunController : MonoBehaviour
                 renderer = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>();
             }
             Material gunMaterial = renderer.material;
-            LeanTween.value(gunModel, 0f, 1f, 1f).setOnUpdate((value) =>
+            LeanTween.value(gunModel, 0f, 1f, 1.8f).setOnUpdate((value) =>
             {
                 gunMaterial.SetFloat("_DissolveAmount", value);
             });

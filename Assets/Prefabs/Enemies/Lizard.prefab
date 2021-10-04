@@ -9938,6 +9938,7 @@ MonoBehaviour:
   animator: {fileID: 2386429025416979000}
   currentAnimState: 
   audioSource: {fileID: 9208087898933612297}
+  spriteRenderer: {fileID: 0}
   currentState: 0
   stateTimer: 0
   aimDirection: {x: 0, y: 0, z: 0}
@@ -9959,7 +9960,7 @@ AudioSource:
   m_GameObject: {fileID: 7708493085390596230}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f926e5f0d42372042a1c89ba34a254ec, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

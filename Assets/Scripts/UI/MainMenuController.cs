@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] Button creditsExit;
     [SerializeField] CanvasGroup credits;
     [SerializeField] Image fadeImage;
+
+    [SerializeField] Slider volumeSlider;
+    [SerializeField] AudioMixer mixer;
 
     void OnEnable()
     {
@@ -25,6 +29,10 @@ public class MainMenuController : MonoBehaviour
         {
             ShowCredits(false);
         });
+        volumeSlider.onValueChanged.AddListener((value) =>
+        {
+            SetVolume(value);
+        });
     }
 
     // Start is called before the first frame update
@@ -32,6 +40,7 @@ public class MainMenuController : MonoBehaviour
     {
         fadeImage.color = Color.black;
         LeanTween.alpha(fadeImage.rectTransform, 0f, 1f);
+        SetVolume(0.8f);
     }
 
     // Update is called once per frame
@@ -63,5 +72,10 @@ public class MainMenuController : MonoBehaviour
     void ExitGame()
     {
         Application.Quit();
+    }
+
+    void SetVolume(float value)
+    {
+        mixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20);
     }
 }

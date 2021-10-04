@@ -142,6 +142,11 @@ public class Enemy : MonoBehaviour, IDamageable
         Destroy(gameObject, 1f);
     }
 
+    public void ForceDie()
+    {
+        Die();
+    }
+
     protected void ChangeAnimationState(string newState)
     {
         if (animator == null) return;

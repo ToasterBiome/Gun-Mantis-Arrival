@@ -26,6 +26,8 @@ public class WorldManager : MonoBehaviour
 
     [SerializeField] GameObject portalObject;
 
+    [SerializeField] AudioSource musicSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -146,12 +148,20 @@ public class WorldManager : MonoBehaviour
         plate.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.red);
         plate.TelegraphDrop();
         yield return new WaitForSeconds(delay);
+        foreach (Enemy enemy in spawnedEnemies)
+        {
+            if (Vector3.Distance(enemy.transform.position, plate.transform.position) < 4f)
+            {
+                enemy.ForceDie();
+            }
+        }
         NavMeshObstacle navMeshObstacle = plate.transform.GetChild(0).gameObject.AddComponent<NavMeshObstacle>();
         navMeshObstacle.size = new Vector3(4, 1, 4);
         navMeshObstacle.carving = true;
         groundPlates.Remove(plate);
         plate.StartDrop(-4);
         RegenerateNavMesh();
+        if (!musicSource.isPlaying) musicSource.Play(); //bad programming - oh well
         yield return null;
     }
 

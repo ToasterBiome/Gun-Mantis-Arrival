@@ -14,10 +14,12 @@ public class Projectile : MonoBehaviour
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] int layerMask;
 
+    [SerializeField] AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class Projectile : MonoBehaviour
 
     void Explode()
     {
+        if (audioSource.clip != null) audioSource.Play();
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, damageDropoff);
         foreach (var hitCollider in hitColliders)
         {
