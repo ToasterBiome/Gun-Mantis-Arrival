@@ -143,6 +143,7 @@ public class WorldManager : MonoBehaviour
     {
         GameObject particles = Instantiate(plateDropParticles, plate.transform.position, Quaternion.Euler(-90, 0, 0));
         Destroy(particles, 2f);
+        plate.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.red);
         yield return new WaitForSeconds(delay);
         NavMeshObstacle navMeshObstacle = plate.transform.GetChild(0).gameObject.AddComponent<NavMeshObstacle>();
         navMeshObstacle.size = new Vector3(4, 1, 4);
