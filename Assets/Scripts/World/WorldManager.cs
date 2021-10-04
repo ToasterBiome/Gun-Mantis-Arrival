@@ -88,7 +88,7 @@ public class WorldManager : MonoBehaviour
     void ChangeWave(int number)
     {
         waveNumber = number;
-        if (waveNumber >= 5)
+        if (waveNumber > 5)
         {
             portalObject.SetActive(true);
             OnWaveChanged?.Invoke(waveNumber);
