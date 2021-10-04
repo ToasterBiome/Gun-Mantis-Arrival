@@ -1733,7 +1733,13 @@ MonoBehaviour:
 
     <b>MKToon</b>
 
-    Michael Kremmel'
+    Michael Kremmel
+
+
+    <b>Sound
+    Effects</b>
+
+    All sound effects are property of their rightful owners'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2956,18 +2962,18 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<u><b>Prismapunch Games</b></u>
 
-    Alex Hartman - 3D
+    Alex Hartman - 3D - @hardtmannn
 
-    Declan Gatenby
-    - 2D
+    Declan
+    Gatenby - 2D - @prisma_punch
 
-    Alex Dimitrijevic - Programming
+    Alex Dimitrijevic - Programming - @baiomuu
 
 
-    <u>Faithful Testers</u>
+    <u>Faithful
+    Testers and Master Complainers</u>
 
-    Shammy,
-    Wiener'
+    Shammy, Wiener, Tastyscarf, Morgan'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

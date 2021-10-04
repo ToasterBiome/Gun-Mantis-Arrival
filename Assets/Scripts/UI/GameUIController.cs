@@ -101,7 +101,7 @@ public class GameUIController : MonoBehaviour
                 restartButton.gameObject.SetActive(true);
                 if (win)
                 {
-                    winText.SetText("You prevailed against the other aliens");
+                    winText.SetText("You are worthy of the GUN MANTIS, use its power righteously and do not let it fall into the wrong hands...");
                 }
                 else
                 {
