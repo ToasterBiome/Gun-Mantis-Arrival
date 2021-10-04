@@ -21,12 +21,13 @@ public class WorldManager : MonoBehaviour
     [SerializeField] int waveNumber;
     [SerializeField] int enemySpawnsLeft;
     public static Action<int> OnWaveChanged;
-
     [SerializeField] List<Enemy> spawnedEnemies;
-
     [SerializeField] GameObject portalObject;
-
     [SerializeField] AudioSource musicSource;
+    [SerializeField] GameObject healthOrb;
+    [SerializeField] GameObject bigHealthOrb;
+    [SerializeField] GameObject superOrb;
+    [SerializeField] GameObject currentSpawn;
 
     // Start is called before the first frame update
     void Start()
@@ -95,9 +96,24 @@ public class WorldManager : MonoBehaviour
     void ChangeWave(int number)
     {
         waveNumber = number;
-        OnWaveChanged?.Invoke(waveNumber);
         enemySpawnsLeft = waveNumber * 5; //5
         dropTimer = -8f;
+        if (waveNumber == 3)
+        {
+            SpawnOrb(bigHealthOrb);
+        }
+        else if (waveNumber != 1)
+        {
+            if (UnityEngine.Random.value > 0.5f)
+            {
+                SpawnOrb(healthOrb);
+            }
+            else
+            {
+                SpawnOrb(superOrb);
+            }
+        }
+        OnWaveChanged?.Invoke(waveNumber);
         GenerateWorld(5, 5);
     }
     void DropRandomPlate()
@@ -179,7 +195,7 @@ public class WorldManager : MonoBehaviour
         {
             GameObject spawnedObject;
 
-            if (UnityEngine.Random.value > 0.6f)
+            if (UnityEngine.Random.value > 0.6f && (location != new Vector3(0, -15, 0)))
             {
                 spawnedObject = Instantiate(plateSetPieces[UnityEngine.Random.Range(0, plateSetPieces.Count)], location, Quaternion.identity);
                 spawnedObject.transform.rotation = GetRandomRotation();
@@ -242,5 +258,13 @@ public class WorldManager : MonoBehaviour
     {
         int rotation = UnityEngine.Random.Range(0, 4);
         return Quaternion.Euler(0, rotation * 90, 0);
+    }
+
+    void SpawnOrb(GameObject gameObject)
+    {
+        if (currentSpawn == null)
+        {
+            currentSpawn = Instantiate(gameObject, new Vector3(0, 1, 0), Quaternion.identity);
+        }
     }
 }

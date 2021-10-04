@@ -310,6 +310,10 @@ MonoBehaviour:
   spawnedEnemies: []
   portalObject: {fileID: 1042065470}
   musicSource: {fileID: 70126674}
+  healthOrb: {fileID: 162343319754342149, guid: ffa9226d36fa3dc4ebd5b49707d52ccb, type: 3}
+  bigHealthOrb: {fileID: 2670399698649072624, guid: 7f95d5a41b93b6f45b76077bb247ec31, type: 3}
+  superOrb: {fileID: 8766771573622559004, guid: ff99572904feac74f8fcc9d1bc99cb02, type: 3}
+  currentSpawn: {fileID: 0}
 --- !u!4 &70126673
 Transform:
   m_ObjectHideFlags: 0
@@ -1387,6 +1391,8 @@ MonoBehaviour:
   weaponOverride: {fileID: 0}
   fireSound: {fileID: 749935764}
   reloadSound: {fileID: 749935770}
+  superActivated: 0
+  superMaterial: {fileID: 2100000, guid: 77fdfc71857ad624ba21b1ff5277821b, type: 2}
 --- !u!114 &749935769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7749,6 +7755,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 404e0621c2ebbab478e8214a28469485, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5dd6411526aed9843be353bd5eb924e4, type: 2}
     - target: {fileID: 919132149155446097, guid: 404e0621c2ebbab478e8214a28469485, type: 3}
       propertyPath: m_Name
       value: SMG

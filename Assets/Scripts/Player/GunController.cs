@@ -24,10 +24,11 @@ public class GunController : MonoBehaviour
     [SerializeField] GameObject impactEffect;
     [SerializeField] GameObject rocketPrefab;
     [SerializeField] Weapon weaponOverride;
-
     [SerializeField] AudioSource fireSound;
-
     [SerializeField] AudioSource reloadSound;
+    [SerializeField] bool superActivated = false;
+    [SerializeField] Material superMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,11 @@ public class GunController : MonoBehaviour
         if (currentWeapon == null) return;
 
         shootCooldown -= Time.deltaTime;
+        //bonus if you're super
+        if (superActivated)
+        {
+            shootCooldown -= Time.deltaTime;
+        }
         if (Input.GetButton("Fire1") && shootCooldown <= 0 && currentAmmo > 0 && !isSoftReloading)
         {
             currentAmmo--;
@@ -57,6 +63,10 @@ public class GunController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
             gunAnimator.SetTrigger("Flip");
+        }
+        else if (Input.GetKeyDown(KeyCode.F) && !isReloading)
+        {
+            gunAnimator.SetTrigger("Inspect");
         }
     }
 
@@ -80,7 +90,15 @@ public class GunController : MonoBehaviour
                 IDamageable damageable = hit.transform.GetComponent<IDamageable>();
                 if (damageable != null)
                 {
-                    damageable.Damage(currentWeapon.damage);
+                    if (superActivated)
+                    {
+                        damageable.Damage(currentWeapon.damage * 2f);
+                    }
+                    else
+                    {
+                        damageable.Damage(currentWeapon.damage);
+                    }
+
                 }
                 GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(impactGO, 1f);
@@ -146,10 +164,26 @@ public class GunController : MonoBehaviour
         {
             newWeapon = possibleWeapons[UnityEngine.Random.Range(0, possibleWeapons.Count)];
         }
+        if (superActivated)
+        {
+            superActivated = false;
+        }
         SwitchWeapon(newWeapon);
         isSoftReloading = false;
         yield return new WaitForSeconds(1f);
         isReloading = false;
         yield return null;
+    }
+    public void ActivateSuper()
+    {
+        superActivated = true;
+        MeshRenderer renderer = gunModel.GetComponent<MeshRenderer>();
+        if (renderer == null)//rocket hacks
+        {
+            renderer = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>();
+        }
+        renderer.material = superMaterial;
+        currentAmmo = currentWeapon.maxAmmo * 2;
+        OnAmmoCountChange?.Invoke(currentAmmo, currentWeapon.maxAmmo);
     }
 }

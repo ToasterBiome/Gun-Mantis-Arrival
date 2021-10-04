@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,28 @@ public class PlayerManager : MonoBehaviour, IDamageable
         {
             health = 0;
             Die();
+        }
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        OnHealthChanged?.Invoke(health);
+    }
+
+    public void Heal(float amount, bool allowOverheal)
+    {
+        health += amount;
+        if (health <= 0)
+        {
+            health = 0;
+            Die();
+        }
+        if (!allowOverheal)
+        {
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
         }
         OnHealthChanged?.Invoke(health);
     }
@@ -38,4 +61,6 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         EndPortal.OnEndGame?.Invoke(false);
     }
+
+
 }

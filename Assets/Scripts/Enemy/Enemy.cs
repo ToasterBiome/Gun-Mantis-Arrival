@@ -60,8 +60,12 @@ public class Enemy : MonoBehaviour, IDamageable
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-20, 20), 0, UnityEngine.Random.Range(-20, 20));
         //agent.SetDestination(randomPlace);
-
         currentState = EnemyState.Cooldown;
+        Material spriteMaterial = spriteRenderer.material;
+        LeanTween.value(spriteRenderer.gameObject, 1f, 0f, 1f).setOnUpdate((value) =>
+            {
+                spriteMaterial.SetFloat("_DissolveAmount", value);
+            });
     }
 
     // Update is called once per frame
@@ -120,8 +124,19 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHP -= damage;
         if (currentHP <= 0)
         {
-
             Die();
+        }
+    }
+
+    public void Heal(float amount, bool allowOverheal)
+    {
+        currentHP += amount;
+        if (!allowOverheal)
+        {
+            if (currentHP > enemyData.maxHP)
+            {
+                currentHP = enemyData.maxHP;
+            }
         }
     }
 
