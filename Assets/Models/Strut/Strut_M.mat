@@ -207,7 +207,7 @@ Material:
     - _DetailNormalMapIntensity: 1
     - _DetailNormalMapScale: 1
     - _Diffuse: 0
-    - _DiffuseSmoothness: 0.249
+    - _DiffuseSmoothness: 0.439
     - _DiffuseThresholdOffset: 0.25
     - _Dissolve: 0
     - _DissolveAmount: 0.5
@@ -231,16 +231,16 @@ Material:
     - _IridescenceSmoothness: 0.5
     - _IridescenceThresholdOffset: 0
     - _Light: 2
-    - _LightBands: 3
-    - _LightBandsScale: 0.458
-    - _LightThreshold: 0.387
+    - _LightBands: 4
+    - _LightBandsScale: 0.667
+    - _LightThreshold: 0.252
     - _LightTransmission: 0
     - _LightTransmissionDistortion: 0.25
     - _LightTransmissionIntensity: 1
     - _LightTransmissionSmoothness: 0.5
     - _LightTransmissionThresholdOffset: 0.25
     - _METALNESS: 0
-    - _Metallic: 0.871
+    - _Metallic: 0.823
     - _Mode: 3
     - _NormalMapIntensity: 1
     - _OcclusionMapIntensity: 1
@@ -267,7 +267,7 @@ Material:
     - _SPECULAR_ROUGHNESS: 0.2
     - _Saturation: 1
     - _SketchMapScale: 1
-    - _Smoothness: 0.264
+    - _Smoothness: 0.307
     - _SmoothnessTextureChannel: 0
     - _Specular: 1
     - _SpecularHighlights: 1
@@ -305,7 +305,7 @@ Material:
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0.111932434, g: 0.9911022, b: 0.9911022, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GoochDarkColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
+    - _GoochDarkColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _LightTransmissionColor: {r: 1, g: 0.65, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
