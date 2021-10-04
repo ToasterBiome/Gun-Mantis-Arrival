@@ -99,11 +99,6 @@ public class PlayerController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (badassCape != null)
-        {
-            badassCape.transform.position = transform.position;
-            badassCape.rotation = transform.rotation * Quaternion.Euler(0, 45, 0);
-        }
         mainCamera.transform.position = transform.position + new Vector3(0, 0.5f);
         mainCamera.transform.localRotation = Quaternion.Euler(cameraRotation, transform.eulerAngles.y, 0);
     }
