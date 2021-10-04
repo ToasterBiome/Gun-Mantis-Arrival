@@ -91,14 +91,19 @@ public class WorldManager : MonoBehaviour
         if (waveNumber == 5)
         {
             portalObject.SetActive(true);
+            dropTimer = -16f;
+        }
+        else
+        {
+            dropTimer = -8f;
         }
         enemySpawnsLeft = waveNumber * 5; //5
-        dropTimer = -8f;
+
         if (waveNumber == 3)
         {
             SpawnOrb(bigHealthOrb);
         }
-        else if (waveNumber != 1)
+        else if (waveNumber != 1 && waveNumber != 5) //dont spawn orb if portal spawns
         {
             if (UnityEngine.Random.value > 0.5f)
             {
