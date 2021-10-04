@@ -22,6 +22,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Color healthColor;
     [SerializeField] Color waveAlertColor;
     [SerializeField] Color waveColor;
+    [SerializeField] Image bloodImage;
 
     void OnEnable()
     {
@@ -79,6 +80,8 @@ public class GameUIController : MonoBehaviour
         healthText.SetText("Health: " + health.ToString("F1") + "%");
         healthText.color = healthAlertColor;
         LeanTween.textColor(healthText.rectTransform, healthColor, 1f);
+        bloodImage.color = new Color(bloodImage.color.r, bloodImage.color.g, bloodImage.color.b, 0.05f);
+        LeanTween.alpha(bloodImage.rectTransform, 0, 1f);
     }
 
     void OnWaveChanged(int waveNumber)
