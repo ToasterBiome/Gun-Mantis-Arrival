@@ -123,11 +123,12 @@ public class GunController : MonoBehaviour
             gunModel.layer = 3;
             gunRB.velocity = transform.up * 8f;
             gunRB.angularVelocity = new Vector3(-360f * Mathf.Deg2Rad, 0, 0);
-            Material gunMaterial = gunModel.GetComponent<MeshRenderer>().material;
-            if (gunMaterial == null)//rocket hacks
+            MeshRenderer renderer = gunModel.GetComponent<MeshRenderer>();
+            if (renderer == null)//rocket hacks
             {
-                gunMaterial = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>().material;
+                renderer = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>();
             }
+            Material gunMaterial = renderer.material;
             LeanTween.value(gunModel, 0f, 1f, 1f).setOnUpdate((value) =>
             {
                 gunMaterial.SetFloat("_DissolveAmount", value);

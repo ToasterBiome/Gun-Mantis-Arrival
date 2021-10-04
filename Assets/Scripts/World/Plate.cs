@@ -8,12 +8,26 @@ public class Plate : MonoBehaviour
     [SerializeField] float velocity;
     [SerializeField] float maxVelocity;
     [SerializeField] float verticalCutoff;
+    [SerializeField] AudioSource audioSource;
+
+    [SerializeField] AudioClip releaseClip;
 
     public void StartDrop(float direction)
     {
         velocity = 0;
         maxVelocity = direction;
         isMoving = true;
+        audioSource = GetComponent<AudioSource>();
+        if (direction < 0)
+        {
+            audioSource.clip = releaseClip;
+            audioSource.Play();
+        }
+    }
+
+    public void TelegraphDrop()
+    {
+        audioSource.Play();
     }
 
     void Update()

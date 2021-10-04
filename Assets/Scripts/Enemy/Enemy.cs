@@ -104,7 +104,10 @@ public class Enemy : MonoBehaviour, IDamageable
     protected virtual void Shoot(Vector3 direction)
     {
         audioSource.clip = enemyData.fireSound;
-        audioSource.Play();
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     protected void RecalculatePosition()
@@ -129,6 +132,7 @@ public class Enemy : MonoBehaviour, IDamageable
         agent.isStopped = true;
         audioSource.clip = enemyData.deathSound;
         audioSource.Play();
+        GetComponent<CapsuleCollider>().enabled = false;
         Material spriteMaterial = spriteRenderer.material;
         LeanTween.value(spriteRenderer.gameObject, 0f, 1f, 1f).setOnUpdate((value) =>
             {

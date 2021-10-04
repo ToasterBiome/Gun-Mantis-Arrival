@@ -1018,7 +1018,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1139,6 +1139,7 @@ MonoBehaviour:
   horizontalMovement: {x: 0, y: 0, z: 0}
   verticalMovement: {x: 0, y: 0, z: 0}
   frozen: 0
+  isGrounded: 0
 --- !u!143 &749935767
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1217,7 +1218,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1645,6 +1646,11 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: a00f17c915e097042a713571a9757e8b, type: 2}
   m_BuildHeightMesh: 0
+--- !u!82 &1284408625 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 891822248438515040, guid: 1fb42c5a3874eb0458fb36cb91ea54fe, type: 3}
+  m_PrefabInstance: {fileID: 7913330653378180503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1445148331
 GameObject:
   m_ObjectHideFlags: 0
@@ -12836,6 +12842,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7913330652595948569, guid: 1fb42c5a3874eb0458fb36cb91ea54fe, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1284408625}
     - target: {fileID: 7913330652595948570, guid: 1fb42c5a3874eb0458fb36cb91ea54fe, type: 3}
       propertyPath: m_Name
       value: Plate

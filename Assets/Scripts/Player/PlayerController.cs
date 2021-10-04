@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     Vector3 verticalMovement;
     [SerializeField] bool frozen = false;
 
+    [SerializeField] bool isGrounded = false;
+
     void OnEnable()
     {
         EndPortal.OnEndGame += OnGameEnd;
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //jumping
-        if (IsGrounded() && Input.GetKey(KeyCode.Space))
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("jump");
             verticalMovement.y = jumpHeight;
@@ -108,21 +110,14 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        LayerMask mask = LayerMask.GetMask("Platform");
-        if (Physics.Raycast(transform.position, -transform.up, 1.1f, mask))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        isGrounded = controller.isGrounded;
+        return controller.isGrounded;
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, (-transform.up * 1.1f));
+        Gizmos.DrawRay(transform.position, (-Vector3.up * 1.05f));
     }
 
     void OnGameEnd(bool win)
