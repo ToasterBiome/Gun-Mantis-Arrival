@@ -112,7 +112,7 @@ public class GunController : MonoBehaviour
         GameObject rocket = Instantiate(rocketPrefab, transform.position + Camera.main.transform.forward, Quaternion.LookRotation(Camera.main.transform.forward, Vector3.up));
         Projectile projectile = rocket.GetComponent<Projectile>();
         projectile.SetProjectileValues(currentWeapon.damage, currentWeapon.shotSpread, Camera.main.transform.forward.normalized * 64f, 6);
-        gunModel.transform.GetChild(0).gameObject.SetActive(false);
+        //gunModel.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     void SwitchWeapon(Weapon weapon)
@@ -143,10 +143,6 @@ public class GunController : MonoBehaviour
             gunRB.angularVelocity = new Vector3(-360f * Mathf.Deg2Rad, 0, 0);
             */
             MeshRenderer renderer = gunModel.GetComponent<MeshRenderer>();
-            if (renderer == null)//rocket hacks
-            {
-                renderer = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>();
-            }
             Material gunMaterial = renderer.material;
             LeanTween.value(gunModel, 0f, 1f, 0.66f).setOnUpdate((value) =>
             {
@@ -179,10 +175,6 @@ public class GunController : MonoBehaviour
     {
         superActivated = true;
         MeshRenderer renderer = gunModel.GetComponent<MeshRenderer>();
-        if (renderer == null)//rocket hacks
-        {
-            renderer = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>();
-        }
         renderer.material = superMaterial;
         currentAmmo = currentWeapon.maxAmmo * 2;
         OnAmmoCountChange?.Invoke(currentAmmo, currentWeapon.maxAmmo);

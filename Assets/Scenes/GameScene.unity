@@ -1319,7 +1319,7 @@ MonoBehaviour:
   gunModel: {fileID: 975873972}
   handTransform: {fileID: 1898406485}
   currentWeapon: {fileID: 0}
-  debugWeapon: {fileID: 11400000, guid: 172e57408b60e7c46a7bda0ed8cbd44a, type: 2}
+  debugWeapon: {fileID: 0}
   muzzleFlashParticles: {fileID: 1990392722}
   currentAmmo: 0
   isReloading: 0
@@ -7709,7 +7709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 404e0621c2ebbab478e8214a28469485, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404e0621c2ebbab478e8214a28469485, type: 3}

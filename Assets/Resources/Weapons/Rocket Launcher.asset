@@ -16,7 +16,7 @@ MonoBehaviour:
   shotCooldown: 5
   damage: 100
   maxAmmo: 1
-  muzzleFlashPoint: {x: 0, y: 0, z: 0}
+  muzzleFlashPoint: {x: 0, y: 0.9, z: 4}
   shotAmount: 1
   shotSpread: 4
   fireSound: {fileID: 8300000, guid: 839c7baeb651b6a4c8a32dfa1ed82b6c, type: 3}
