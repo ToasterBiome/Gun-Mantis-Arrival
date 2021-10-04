@@ -77,15 +77,7 @@ public class WorldManager : MonoBehaviour
             {
                 if (spawnedEnemies.Count == 0) //if all enemies are dead
                 {
-                    if (waveNumber < 6)
-                    {
-                        ChangeWave(waveNumber + 1);
-                    }
-                    else
-                    {
-                        GenerateWorld(5, 5);
-                        portalObject.SetActive(true);
-                    }
+                    ChangeWave(waveNumber + 1);
                 }
             }
 
@@ -96,6 +88,12 @@ public class WorldManager : MonoBehaviour
     void ChangeWave(int number)
     {
         waveNumber = number;
+        if (waveNumber >= 5)
+        {
+            GenerateWorld(5, 5);
+            portalObject.SetActive(true);
+            return;
+        }
         enemySpawnsLeft = waveNumber * 5; //5
         dropTimer = -8f;
         if (waveNumber == 3)

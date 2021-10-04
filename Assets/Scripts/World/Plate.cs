@@ -9,7 +9,6 @@ public class Plate : MonoBehaviour
     [SerializeField] float maxVelocity;
     [SerializeField] float verticalCutoff;
     [SerializeField] AudioSource audioSource;
-
     [SerializeField] AudioClip releaseClip;
 
     public void StartDrop(float direction)
