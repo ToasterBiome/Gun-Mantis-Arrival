@@ -133,28 +133,29 @@ public class GunController : MonoBehaviour
     IEnumerator Reload()
     {
         gunAnimator.SetTrigger("Reload");
-        yield return new WaitForSeconds(0.2f);
         if (gunModel != null)
         {
+            /*
             gunModel.transform.SetParent(null);
             Rigidbody gunRB = gunModel.AddComponent<Rigidbody>();
             gunModel.layer = 3;
             gunRB.velocity = transform.up * 8f;
             gunRB.angularVelocity = new Vector3(-360f * Mathf.Deg2Rad, 0, 0);
+            */
             MeshRenderer renderer = gunModel.GetComponent<MeshRenderer>();
             if (renderer == null)//rocket hacks
             {
                 renderer = gunModel.transform.GetChild(1).GetComponent<MeshRenderer>();
             }
             Material gunMaterial = renderer.material;
-            LeanTween.value(gunModel, 0f, 1f, 1.8f).setOnUpdate((value) =>
+            LeanTween.value(gunModel, 0f, 1f, 0.66f).setOnUpdate((value) =>
             {
                 gunMaterial.SetFloat("_DissolveAmount", value);
             });
-            Destroy(gunModel.gameObject, 1.8f);
+            Destroy(gunModel.gameObject, 0.66f);
         }
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         Weapon newWeapon = null;
         if (weaponOverride != null)
         {
